@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ciumac Sergiu")]
 [assembly: AssemblyProduct("SoundFingerprinting.Audio.Bass")]
-[assembly: AssemblyCopyright("Copyright © 2014")]
+[assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
@@ -15,3 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 [assembly: InternalsVisibleTo("SoundFingerprinting.Audio.Bass.Tests")]
 [assembly: AssemblyVersion("2.0.0")]
+[assembly: AssemblyInformationalVersion("2.0.0")]
