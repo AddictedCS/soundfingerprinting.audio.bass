@@ -19,7 +19,7 @@
             this.samplesAggregator = samplesAggregator;
         }
 
-        public float[] Resample(int sourceStream, int sampleRate, int seconds, int startAt, Func<int, ISamplesProvider> getSamplesProvider)
+        public float[] Resample(int sourceStream, int sampleRate, double seconds, double startAt, Func<int, ISamplesProvider> getSamplesProvider)
         {
             int mixerStream = 0;
             try
@@ -36,7 +36,7 @@
             }
         }
 
-        private void SeekToSecondInCaseIfRequired(int stream, int startAtSecond)
+        private void SeekToSecondInCaseIfRequired(int stream, double startAtSecond)
         {
             if (startAtSecond > 0)
             {

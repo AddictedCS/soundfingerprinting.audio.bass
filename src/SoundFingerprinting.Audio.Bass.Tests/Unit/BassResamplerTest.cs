@@ -1,5 +1,6 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.Tests.Unit
 {
+    using System;
     using System.Collections.Generic;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,7 +10,6 @@
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
     using SoundFingerprinting.Tests;
-    using SoundFingerprinting.Tests.Unit.Audio;
 
     using Un4seen.Bass;
 
@@ -57,9 +57,8 @@
             proxy.Setup(p => p.FreeStream(MixerStream)).Returns(true);
             samplesAggregator.Setup(s => s.ReadSamplesFromSource(It.IsAny<ISamplesProvider>(), Seconds, SampleRate))
                 .Returns(samplesToReturn);
-
-            float[] samples = resampler.Resample(
-                SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(new Queue<int>()));
+            var queue = new Queue<float[]>(new[] { samplesToReturn });
+            float[] samples = resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(queue));
 
             Assert.AreEqual(samplesToReturn.Length, samples.Length);
         }
@@ -79,7 +78,8 @@
             proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BASSFlag.BASS_MIXER_FILTER)).Returns(false);
             proxy.Setup(p => p.GetLastError()).Returns("Combining streams failed");
 
-            resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(new Queue<int>()));
+            var queue = new Queue<float[]>(new[] { new float[0] });
+            resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(queue));
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@
             proxy.Setup(p => p.GetLastError()).Returns("Failed to seek to a specific second");
             proxy.Setup(p => p.FreeStream(SourceStream)).Returns(true);
 
-            resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(new Queue<int>()));
+            resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(new Queue<float[]>()));
         }
     }
 }

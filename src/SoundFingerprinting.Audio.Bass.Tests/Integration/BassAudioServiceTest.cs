@@ -7,8 +7,6 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using SoundFingerprinting.Tests.Integration;
-
     [TestClass]
     public class BassAudioServiceTest : AbstractIntegrationTest
     {

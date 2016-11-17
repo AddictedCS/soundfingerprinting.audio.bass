@@ -6,7 +6,6 @@
 
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
-    using SoundFingerprinting.Tests.Integration;
 
     [TestClass]
     public class BassTagServiceTest : AbstractIntegrationTest

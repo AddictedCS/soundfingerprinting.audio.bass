@@ -51,17 +51,16 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio, Version=1.7.1.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.7.1\lib\net35\NAudio.dll</HintPath>
+    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SoundFingerprinting">
       <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="SoundFingerprinting.Audio, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
@@ -97,16 +96,13 @@
     <Compile Include="Integration\BassAudioServiceTest.cs" />
     <Compile Include="Integration\BassTagServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unit\Audio\ContinuousStreamSamplesProviderTest.cs" />
-    <Compile Include="Unit\Audio\QueueSamplesProvider.cs" />
-    <Compile Include="Unit\Audio\SamplesAggregatorTest.cs" />
-    <Compile Include="Unit\Audio\StrideTest.cs" />
     <Compile Include="Unit\BassAudioServiceTest.cs" />
     <Compile Include="Unit\BassPlayAudioFileServiceTest.cs" />
     <Compile Include="Unit\BassResamplerTest.cs" />
     <Compile Include="Unit\BassSamplesProviderTest.cs" />
     <Compile Include="Unit\BassStreamFactoryTest.cs" />
     <Compile Include="Unit\BassStreamingUrlReaderTest.cs" />
+    <Compile Include="Unit\QueueSamplesProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoundFingerprinting.Audio.Bass\SoundFingerprinting.Audio.Bass.csproj">
