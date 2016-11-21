@@ -44,19 +44,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SoundFingerprinting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.dll</HintPath>
+      <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SoundFingerprinting.Audio, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
+      <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SoundFingerprinting.Audio.NAudio, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
+      <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SoundFingerprinting.Infrastructure, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
+      <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -118,15 +118,6 @@
     <Content Include="x64\bass_fx.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="x64\libfftw3-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x64\libfftw3f-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x64\libfftw3l-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="x64\tags.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -155,15 +146,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="x86\bass_fx.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\libfftw3-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\libfftw3f-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\libfftw3l-3.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="x86\tags.dll">

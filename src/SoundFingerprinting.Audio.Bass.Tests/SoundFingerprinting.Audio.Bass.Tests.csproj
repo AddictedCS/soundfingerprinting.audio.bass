@@ -59,19 +59,19 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.dll</HintPath>
+    <Reference Include="SoundFingerprinting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SoundFingerprinting.Audio, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
+      <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting.Audio.NAudio, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SoundFingerprinting.Audio.NAudio">
+      <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
     </Reference>
     <Reference Include="SoundFingerprinting.Infrastructure, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
+      <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -117,24 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestEnvironment\Kryptonite.mp3" />
-    <Content Include="x64\libfftw3-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x64\libfftw3f-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x64\libfftw3l-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\libfftw3-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\libfftw3f-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\libfftw3l-3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

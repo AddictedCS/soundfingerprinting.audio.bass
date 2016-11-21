@@ -8,7 +8,6 @@
 
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
-    using SoundFingerprinting.Tests;
 
     [TestClass]
     public class BassAudioServiceTest : AbstractTest

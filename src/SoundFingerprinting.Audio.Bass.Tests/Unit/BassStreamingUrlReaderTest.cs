@@ -6,8 +6,6 @@ namespace SoundFingerprinting.Audio.Bass.Tests.Unit
 
     using Moq;
 
-    using SoundFingerprinting.Tests;
-
     [TestClass]
     public class BassStreamingUrlReaderTest : AbstractTest
     {

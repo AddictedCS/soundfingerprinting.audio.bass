@@ -6,8 +6,6 @@
 
     using Moq;
 
-    using SoundFingerprinting.Tests;
-
     [TestClass]
     public class BassMicrophoneRecordingServiceTest : AbstractTest
     {

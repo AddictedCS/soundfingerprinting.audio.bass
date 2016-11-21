@@ -9,7 +9,6 @@
 
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
-    using SoundFingerprinting.Tests;
 
     using Un4seen.Bass;
 

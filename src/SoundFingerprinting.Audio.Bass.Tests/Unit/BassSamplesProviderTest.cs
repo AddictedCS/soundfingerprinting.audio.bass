@@ -5,7 +5,6 @@
     using Moq;
 
     using SoundFingerprinting.Audio.Bass;
-    using SoundFingerprinting.Tests;
 
     [TestClass]
     public class BassSamplesProviderTest : AbstractTest

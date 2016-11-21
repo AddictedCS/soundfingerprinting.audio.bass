@@ -7,7 +7,6 @@
 
     using SoundFingerprinting.DAO;
     using SoundFingerprinting.Data;
-    using SoundFingerprinting.Tests;
 
     [DeploymentItem(@"TestEnvironment\floatsamples.bin")]
     [DeploymentItem(@"TestEnvironment\Kryptonite.mp3")]
