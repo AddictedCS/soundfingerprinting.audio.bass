@@ -59,7 +59,7 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SoundFingerprinting">
       <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -67,8 +67,9 @@
       <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting.Audio.NAudio">
+    <Reference Include="SoundFingerprinting.Audio.NAudio, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SoundFingerprinting.Infrastructure, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SoundFingerprinting.3.0.0-alpha\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
