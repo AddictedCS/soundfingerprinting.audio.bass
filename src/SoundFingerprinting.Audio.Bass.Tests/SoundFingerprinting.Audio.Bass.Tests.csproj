@@ -117,7 +117,7 @@
     <None Include="TestEnvironment\floatsamples.bin" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestEnvironment\Kryptonite.mp3" />
+    <Content Include="TestEnvironment\Chopin.mp3" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -78,6 +78,7 @@
             long expectedSize = info.Length - WaveHeader;
             long actualSize = audioSamples.Samples.Length * (BitsPerSample / 8);
             Assert.AreEqual(expectedSize, actualSize);
+            File.Delete(tempFile);
         }
 
         private float[] GetSubsetOfSamplesFromFullSong(float[] samples, int secondsToRead, int startAtSecond)
