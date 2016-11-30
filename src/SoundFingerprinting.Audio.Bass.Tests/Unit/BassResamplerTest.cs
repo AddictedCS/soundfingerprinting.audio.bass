@@ -3,16 +3,17 @@
     using System;
     using System.Collections.Generic;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using Moq;
+
+    using NUnit.Framework;
+    using NUnit.Framework.Internal;
 
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
 
     using Un4seen.Bass;
 
-    [TestClass]
+    [TestFixture]
     public class BassResamplerTest : AbstractTest
     {
         private BassResampler resampler;
@@ -23,7 +24,7 @@
 
         private Mock<ISamplesAggregator> samplesAggregator;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             proxy = new Mock<IBassServiceProxy>(MockBehavior.Strict);
@@ -33,7 +34,7 @@
             resampler = new BassResampler(proxy.Object, streamFactory.Object, samplesAggregator.Object);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TearDown()
         {
             proxy.VerifyAll();
@@ -41,7 +42,7 @@
             samplesAggregator.VerifyAll();
         }
 
-        [TestMethod]
+        [Test]
         public void TestResample()
         {
             const int SourceStream = 100;
@@ -62,8 +63,7 @@
             Assert.AreEqual(samplesToReturn.Length, samples.Length);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BassException))]
+        [Test]
         public void TestCombineStreamsFailsDuringResample()
         {
             const int SourceStream = 100;
@@ -78,11 +78,18 @@
             proxy.Setup(p => p.GetLastError()).Returns("Combining streams failed");
 
             var queue = new Queue<float[]>(new[] { new float[0] });
-            resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(queue));
+
+            Assert.Throws<BassException>(
+                () =>
+                    resampler.Resample(
+                        SourceStream,
+                        SampleRate,
+                        Seconds,
+                        StartAt,
+                        mixerStream => new QueueSamplesProvider(queue)));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BassException))]
+        [Test]
         public void TestSeekToSecondFailedBeforeResample()
         {
             const int SourceStream = 100;
@@ -93,7 +100,14 @@
             proxy.Setup(p => p.GetLastError()).Returns("Failed to seek to a specific second");
             proxy.Setup(p => p.FreeStream(SourceStream)).Returns(true);
 
-            resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(new Queue<float[]>()));
+            Assert.Throws<BassException>(
+                () =>
+                    resampler.Resample(
+                        SourceStream,
+                        SampleRate,
+                        Seconds,
+                        StartAt,
+                        mixerStream => new QueueSamplesProvider(new Queue<float[]>())));
         }
     }
 }

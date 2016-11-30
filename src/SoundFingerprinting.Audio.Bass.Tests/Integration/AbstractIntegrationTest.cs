@@ -3,14 +3,11 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using DAO;
+    using Data;
 
-    using SoundFingerprinting.DAO;
-    using SoundFingerprinting.Data;
+    using NUnit.Framework;
 
-    [DeploymentItem(@"TestEnvironment\floatsamples.bin")]
-    [DeploymentItem(@"TestEnvironment\Chopin.mp3")]
-    [TestClass]
     public abstract class AbstractIntegrationTest : AbstractTest
     {
         protected void AssertHashDatasAreTheSame(IList<HashedFingerprint> firstHashDatas, IList<HashedFingerprint> secondHashDatas)
@@ -18,8 +15,8 @@
             Assert.AreEqual(firstHashDatas.Count, secondHashDatas.Count);
 
             // hashes are not ordered as parallel computation is involved
-            firstHashDatas = this.SortHashesByFirstValueOfHashBin(firstHashDatas);
-            secondHashDatas = this.SortHashesByFirstValueOfHashBin(secondHashDatas);
+            firstHashDatas = SortHashesByFirstValueOfHashBin(firstHashDatas);
+            secondHashDatas = SortHashesByFirstValueOfHashBin(secondHashDatas);
 
             for (int i = 0; i < firstHashDatas.Count; i++)
             {

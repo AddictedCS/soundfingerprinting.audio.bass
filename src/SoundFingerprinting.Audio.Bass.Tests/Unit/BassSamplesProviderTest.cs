@@ -1,12 +1,13 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.Tests.Unit
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using Moq;
+
+    using NUnit.Framework;
+    using NUnit.Framework.Internal;
 
     using SoundFingerprinting.Audio.Bass;
 
-    [TestClass]
+    [TestFixture]
     public class BassSamplesProviderTest : AbstractTest
     {
         private const int SourceId = 100;
@@ -15,7 +16,7 @@
 
         private Mock<IBassServiceProxy> proxy;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             proxy = new Mock<IBassServiceProxy>(MockBehavior.Strict);
@@ -23,7 +24,7 @@
             samplesProvider = new BassSamplesProvider(proxy.Object, SourceId);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetSamplesProvider()
         {
             const int LengthInBytes = 1024 * 4;

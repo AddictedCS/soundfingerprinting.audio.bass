@@ -2,17 +2,18 @@
 {
     using System;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
+    using NUnit.Framework.Internal;
 
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
 
-    [TestClass]
+    [TestFixture]
     public class BassTagServiceTest : AbstractIntegrationTest
     {
         private readonly ITagService tagService = new BassTagService();
 
-        [TestMethod]
+        [Test]
         public void TagAreSuccessfullyReadFromFile()
         {
             TagInfo tags = tagService.GetTagInfo(PathToMp3);

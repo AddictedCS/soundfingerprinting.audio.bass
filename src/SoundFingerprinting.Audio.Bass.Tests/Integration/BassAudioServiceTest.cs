@@ -5,9 +5,9 @@
     using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class BassAudioServiceTest : AbstractIntegrationTest
     {
         private readonly BassAudioService bassAudioService;
@@ -19,7 +19,7 @@
             bassWaveFileUtility = new BassWaveFileUtility();
         }
 
-        [TestMethod]
+        [Test]
         public void DurationOfReadAudioIsCorrect()
         {
             var audioSamples = bassAudioService.ReadMonoSamplesFromFile(PathToMp3, SampleRate);
@@ -28,7 +28,7 @@
             Assert.AreEqual(PathToMp3, audioSamples.Origin);
         }
 
-        [TestMethod]
+        [Test]
         public void ComparePreStoredSameplesWithCurrentlyReadAudioSamples()
         {
             BinaryFormatter serializer = new BinaryFormatter();
@@ -45,7 +45,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void CompareReadingFromASpecificPartOfTheSong()
         {
             const int SecondsToRead = 10;
@@ -66,7 +66,7 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ReadMonoFromFileTest()
         {
             string tempFile = string.Format(@"{0}{1}", Path.GetTempPath(), "0.wav");

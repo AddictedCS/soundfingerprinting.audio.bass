@@ -1,10 +1,9 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.Tests
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.IO;
 
-    [DeploymentItem(@"x86", @"x86")]
-    [DeploymentItem(@"x64", @"x64")]
-    [TestClass]
+    using NUnit.Framework;
+
     public abstract class AbstractTest
     {
         protected const double Epsilon = 0.0001;
@@ -17,9 +16,9 @@
 
         protected const int WaveHeader = 58;
 
-        protected const string PathToMp3 = @"Kryptonite.mp3";
+        protected readonly string PathToMp3 = Path.Combine(TestContext.CurrentContext.TestDirectory, "Chopin.mp3");
 
-        protected const string PathToSamples = @"floatsamples.bin";
+        protected readonly string PathToSamples = Path.Combine(TestContext.CurrentContext.TestDirectory, "floatsamples.bin");
 
         protected const int SamplesToRead = 128 * 64;
 
