@@ -9,7 +9,7 @@
     using SoundFingerprinting.Data;
 
     [DeploymentItem(@"TestEnvironment\floatsamples.bin")]
-    [DeploymentItem(@"TestEnvironment\Kryptonite.mp3")]
+    [DeploymentItem(@"TestEnvironment\Chopin.mp3")]
     [TestClass]
     public abstract class AbstractIntegrationTest : AbstractTest
     {
