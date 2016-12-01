@@ -55,20 +55,20 @@
       <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0-beta\lib\net45\SoundFingerprinting.dll</HintPath>
+    <Reference Include="SoundFingerprinting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SoundFingerprinting.Audio, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0-beta\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
+      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting.Audio.NAudio">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0-beta\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
+    <Reference Include="SoundFingerprinting.Audio.NAudio, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting.Infrastructure">
-      <HintPath>..\packages\SoundFingerprinting.3.0.0-beta\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
+    <Reference Include="SoundFingerprinting.Infrastructure, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoundFingerprinting.3.0.0\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -107,7 +107,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="TestEnvironment\floatsamples.bin" />
+    <Content Include="TestEnvironment\chopinsamples.bin" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestEnvironment\Chopin.mp3" />

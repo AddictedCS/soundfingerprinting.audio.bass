@@ -24,25 +24,8 @@
         {
             var audioSamples = bassAudioService.ReadMonoSamplesFromFile(PathToMp3, SampleRate);
 
-            Assert.IsTrue(Math.Abs(232.80333 - audioSamples.Duration) < Epsilon);
+            Assert.AreEqual(193.07, audioSamples.Duration, 0.01);
             Assert.AreEqual(PathToMp3, audioSamples.Origin);
-        }
-
-        [Test]
-        public void ComparePreStoredSameplesWithCurrentlyReadAudioSamples()
-        {
-            BinaryFormatter serializer = new BinaryFormatter();
-
-            using (Stream stream = new FileStream(PathToSamples, FileMode.Open, FileAccess.Read))
-            {
-                float[] samples = (float[])serializer.Deserialize(stream);
-                var audioSamples = bassAudioService.ReadMonoSamplesFromFile(PathToMp3, SampleRate);
-                Assert.AreEqual(samples.Length, audioSamples.Samples.Length);
-                for (int i = 0; i < samples.Length; i++)
-                {
-                    Assert.IsTrue(Math.Abs(samples[i] - audioSamples.Samples[i]) < 0.0000001);
-                }
-            }
         }
 
         [Test]
@@ -56,8 +39,8 @@
 
             using (Stream stream = new FileStream(PathToSamples, FileMode.Open, FileAccess.Read))
             {
-                float[] samples = (float[])serializer.Deserialize(stream);
-                float[] subsetOfSamples = GetSubsetOfSamplesFromFullSong(samples, SecondsToRead, StartAtSecond);
+                AudioSamples samples = (AudioSamples) serializer.Deserialize(stream);
+                float[] subsetOfSamples = GetSubsetOfSamplesFromFullSong(samples.Samples, SecondsToRead, StartAtSecond);
                 var audioSamples = bassAudioService.ReadMonoSamplesFromFile(PathToMp3, SampleRate, SecondsToRead, StartAtSecond);
                 Assert.AreEqual(subsetOfSamples.Length, audioSamples.Samples.Length);
                 Assert.IsTrue(

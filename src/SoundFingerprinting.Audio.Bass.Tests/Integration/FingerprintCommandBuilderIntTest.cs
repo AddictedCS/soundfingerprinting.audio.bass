@@ -3,15 +3,15 @@
     using System;
     using System.Linq;
 
+    using Audio;
+    using Bass;
+    using Builder;
+    using DAO.Data;
+    using InMemory;
+
     using NUnit.Framework;
 
-    using SoundFingerprinting.Audio;
-    using SoundFingerprinting.Audio.Bass;
-    using SoundFingerprinting.Audio.Bass.Tests;
-    using SoundFingerprinting.Builder;
-    using SoundFingerprinting.Configuration;
-    using SoundFingerprinting.DAO.Data;
-    using SoundFingerprinting.InMemory;
+    using Tests;
 
     [TestFixture]
     public class FingerprintCommandBuilderIntTest : AbstractTest

@@ -44,13 +44,7 @@
         {
             int stream = streamFactory.CreateStream(pathToSourceFile);
             float[] samples = resampler.Resample(stream, sampleRate, seconds, startAt, mixerStream => new BassSamplesProvider(proxy, mixerStream));
-            return new AudioSamples
-                {
-                    Samples = samples,
-                    Origin = pathToSourceFile,
-                    SampleRate = sampleRate,
-                    Duration = (double)samples.Length / sampleRate
-                };
+            return new AudioSamples(samples, pathToSourceFile, sampleRate);
         }
     }
 }
