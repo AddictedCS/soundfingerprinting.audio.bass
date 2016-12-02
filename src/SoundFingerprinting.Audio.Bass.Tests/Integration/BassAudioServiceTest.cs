@@ -39,7 +39,7 @@
 
             using (Stream stream = new FileStream(PathToSamples, FileMode.Open, FileAccess.Read))
             {
-                AudioSamples samples = (AudioSamples) serializer.Deserialize(stream);
+                AudioSamples samples = (AudioSamples)serializer.Deserialize(stream);
                 float[] subsetOfSamples = GetSubsetOfSamplesFromFullSong(samples.Samples, SecondsToRead, StartAtSecond);
                 var audioSamples = bassAudioService.ReadMonoSamplesFromFile(PathToMp3, SampleRate, SecondsToRead, StartAtSecond);
                 Assert.AreEqual(subsetOfSamples.Length, audioSamples.Samples.Length);

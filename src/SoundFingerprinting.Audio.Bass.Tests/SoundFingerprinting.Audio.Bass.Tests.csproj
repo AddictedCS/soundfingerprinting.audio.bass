@@ -132,9 +132,10 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>copy "$(ProjectDir)TestEnvironment\*.*" "$(TargetDir)"</PreBuildEvent>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />
+<PropertyGroup>
+    <PreBuildEvent Condition=" '$(OS)' != 'Unix' ">copy "$(ProjectDir)\TestEnvironment\*.*" "$(TargetDir)"</PreBuildEvent>
+    <PreBuildEvent Condition=" '$(OS)' == 'Unix' ">cp $(ProjectDir)\TestEnvironment/*.* $(TargetDir)</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
