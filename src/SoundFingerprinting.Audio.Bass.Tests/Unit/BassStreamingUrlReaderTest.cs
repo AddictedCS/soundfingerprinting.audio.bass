@@ -2,13 +2,12 @@ namespace SoundFingerprinting.Audio.Bass.Tests.Unit
 {
     using System;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using Moq;
 
-    using SoundFingerprinting.Tests;
+    using NUnit.Framework;
+    using NUnit.Framework.Internal;
 
-    [TestClass]
+    [TestFixture]
     public class BassStreamingUrlReaderTest : AbstractTest
     {
         private IStreamingUrlReader streamingUrlReader;
@@ -17,7 +16,7 @@ namespace SoundFingerprinting.Audio.Bass.Tests.Unit
         private Mock<IBassStreamFactory> streamFactory;
         private Mock<IBassResampler> resampler;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             proxy = new Mock<IBassServiceProxy>(MockBehavior.Strict);
@@ -27,7 +26,7 @@ namespace SoundFingerprinting.Audio.Bass.Tests.Unit
             streamingUrlReader = new BassStreamingUrlReader(proxy.Object, streamFactory.Object, resampler.Object);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TearDown()
         {
             proxy.VerifyAll();
@@ -35,7 +34,7 @@ namespace SoundFingerprinting.Audio.Bass.Tests.Unit
             resampler.VerifyAll();
         }
 
-        [TestMethod]
+        [Test]
         public void TestReadMonoFromUrl()
         {
             const int StreamId = 100;

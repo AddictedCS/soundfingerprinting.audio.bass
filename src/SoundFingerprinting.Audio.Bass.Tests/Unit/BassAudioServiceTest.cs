@@ -2,15 +2,14 @@
 {
     using System;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using Moq;
+
+    using NUnit.Framework;
 
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
-    using SoundFingerprinting.Tests;
 
-    [TestClass]
+    [TestFixture]
     public class BassAudioServiceTest : AbstractTest
     {
         private IAudioService audioService;
@@ -19,7 +18,7 @@
         private Mock<IBassStreamFactory> streamFactory;
         private Mock<IBassResampler> resampler;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             proxy = new Mock<IBassServiceProxy>(MockBehavior.Strict);
@@ -29,7 +28,7 @@
             audioService = new BassAudioService(proxy.Object, streamFactory.Object, resampler.Object);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TearDown()
         {
             proxy.VerifyAll();
@@ -37,7 +36,7 @@
             resampler.VerifyAll();
         }
 
-        [TestMethod]
+        [Test]
         public void TestReadMonoFromFile()
         {
             const int StreamId = 100;
@@ -51,7 +50,7 @@
             Assert.AreSame(samplesToReturn, samples.Samples);
         }
 
-        [TestMethod]
+        [Test]
         public void TestReadMonoFromFileFromSpecificSecond()
         {
             const int StreamId = 100;
