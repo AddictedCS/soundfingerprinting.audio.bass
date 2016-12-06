@@ -1,22 +1,22 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.Tests.Unit
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using Moq;
 
+    using NUnit.Framework;
+    using NUnit.Framework.Internal;
+
     using SoundFingerprinting.Audio.Bass;
-    using SoundFingerprinting.Tests;
 
     using Un4seen.Bass;
 
-    [TestClass]
+    [TestFixture]
     public class BassStreamFactoryTest : AbstractTest
     {
         private IBassStreamFactory streamFactory;
 
         private Mock<IBassServiceProxy> proxy;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             proxy = new Mock<IBassServiceProxy>(MockBehavior.Strict);
@@ -24,13 +24,13 @@
             streamFactory = new BassStreamFactory(proxy.Object);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TearDown()
         {
             proxy.VerifyAll();
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateStream()
         {
             const int StreamId = 100;
@@ -41,17 +41,16 @@
             Assert.AreEqual(StreamId, result);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BassException))]
+        [Test]
         public void TestCreateStreamFailed()
         {
             proxy.Setup(p => p.CreateStream("path-to-audio-file", It.IsAny<BASSFlag>())).Returns(0);
             proxy.Setup(p => p.GetLastError()).Returns("Failed to create stream");
 
-            streamFactory.CreateStream("path-to-audio-file");
+            Assert.Throws<BassException>(() => streamFactory.CreateStream("path-to-audio-file"));
         }
         
-        [TestMethod]
+        [Test]
         public void TestCreateMixerStream()
         {
             const int MixerStreamId = 100;
@@ -63,17 +62,16 @@
             Assert.AreEqual(MixerStreamId, result);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BassException))]
+        [Test]
         public void TestCreateMixerStreamFailed()
         {
             proxy.Setup(p => p.CreateMixerStream(5512, BassConstants.NumberOfChannels, It.IsAny<BASSFlag>())).Returns(0);
             proxy.Setup(p => p.GetLastError()).Returns("Failed to create mixer stream");
 
-            streamFactory.CreateMixerStream(5512);
+            Assert.Throws<BassException>(() => streamFactory.CreateMixerStream(5512));
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateStreamFromUrl()
         {
             const int StreamToUrl = 100;
@@ -85,17 +83,16 @@
             Assert.AreEqual(StreamToUrl, result);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BassException))]
+        [Test]
         public void TestCreateStreamFromUrlFailed()
         {
             proxy.Setup(p => p.CreateStreamFromUrl("url-to-streaming-resource", It.IsAny<BASSFlag>())).Returns(0);
             proxy.Setup(p => p.GetLastError()).Returns("Failed to create stream to url");
 
-            streamFactory.CreateStreamFromStreamingUrl("url-to-streaming-resource");
+            Assert.Throws<BassException>(() => streamFactory.CreateStreamFromStreamingUrl("url-to-streaming-resource"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestCreateStreamToMicrophone()
         {
             const int StreamToMicrophone = 100;
@@ -108,14 +105,13 @@
             Assert.AreEqual(StreamToMicrophone, result);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BassException))]
+        [Test]
         public void TestCreateStreamToMicrophoneFailed()
         {
             proxy.Setup(p => p.StartRecording(5512, BassConstants.NumberOfChannels, It.IsAny<BASSFlag>())).Returns(0);
             proxy.Setup(p => p.GetLastError()).Returns("Failed to create stream to microphone");
 
-            streamFactory.CreateStreamFromMicrophone(5512);
+            Assert.Throws<BassException>(() => streamFactory.CreateStreamFromMicrophone(5512));
         }
     }
 }

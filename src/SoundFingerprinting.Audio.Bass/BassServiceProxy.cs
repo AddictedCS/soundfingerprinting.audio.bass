@@ -132,9 +132,9 @@ namespace SoundFingerprinting.Audio.Bass
             return BassMix.BASS_Mixer_StreamAddChannel(mixerStream, stream, flags);
         }
 
-        public bool ChannelSetPosition(int stream, int seekToSecond)
+        public bool ChannelSetPosition(int stream, double seekToSecond)
         {
-            return Bass.BASS_ChannelSetPosition(stream, (double)seekToSecond);
+            return Bass.BASS_ChannelSetPosition(stream, seekToSecond);
         }
 
         public int ChannelGetData(int stream, float[] buffer, int lengthInBytes)

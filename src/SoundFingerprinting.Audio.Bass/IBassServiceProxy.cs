@@ -48,7 +48,7 @@
 
         bool CombineMixerStreams(int mixerStream, int stream, BASSFlag flags);
 
-        bool ChannelSetPosition(int stream, int seekToSecond);
+        bool ChannelSetPosition(int stream, double seekToSecond);
 
         int ChannelGetData(int stream, float[] buffer, int lengthInBytes);
 

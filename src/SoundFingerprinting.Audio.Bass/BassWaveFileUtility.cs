@@ -9,8 +9,7 @@ namespace SoundFingerprinting.Audio.Bass
 
         public void WriteSamplesToFile(float[] samples, int sampleRate, string destination)
         {
-            var waveWriter = new WaveWriter(
-                destination, BassConstants.NumberOfChannels, sampleRate, BitsPerSample, true);
+            var waveWriter = new WaveWriter(destination, BassConstants.NumberOfChannels, sampleRate, BitsPerSample, true);
             waveWriter.Write(samples, samples.Length * FloatLength);
             waveWriter.Close();
         }

@@ -1,28 +1,25 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.Tests.Integration
 {
-    using System;
+    using Audio;
+    using Bass;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    using SoundFingerprinting.Audio;
-    using SoundFingerprinting.Audio.Bass;
-    using SoundFingerprinting.Tests.Integration;
-
-    [TestClass]
+    [TestFixture]
     public class BassTagServiceTest : AbstractIntegrationTest
     {
         private readonly ITagService tagService = new BassTagService();
 
-        [TestMethod]
+        [Test]
         public void TagAreSuccessfullyReadFromFile()
         {
             TagInfo tags = tagService.GetTagInfo(PathToMp3);
             Assert.IsNotNull(tags);
-            Assert.AreEqual("3 Doors Down", tags.Artist);
-            Assert.AreEqual("Kryptonite", tags.Title);
-            Assert.AreEqual("USUR19980187", tags.ISRC);
-            Assert.AreEqual(1997, tags.Year);
-            Assert.IsTrue(Math.Abs(232 - tags.Duration) < 1);
+            Assert.AreEqual(string.Empty, tags.Artist);
+            Assert.AreEqual("Chopin", tags.Title);
+            Assert.AreEqual(string.Empty, tags.ISRC);
+            Assert.AreEqual(0, tags.Year);
+            Assert.AreEqual(193.07d , tags.Duration, 0.1);
         }
     }
 }

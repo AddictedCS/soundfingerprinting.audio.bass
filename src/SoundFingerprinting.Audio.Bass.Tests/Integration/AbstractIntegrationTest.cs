@@ -1,16 +1,13 @@
-﻿namespace SoundFingerprinting.Tests.Integration
+﻿namespace SoundFingerprinting.Audio.Bass.Tests.Integration
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using DAO;
+    using Data;
 
-    using SoundFingerprinting.DAO;
-    using SoundFingerprinting.Data;
+    using NUnit.Framework;
 
-    [DeploymentItem(@"TestEnvironment\floatsamples.bin")]
-    [DeploymentItem(@"TestEnvironment\Kryptonite.mp3")]
-    [TestClass]
     public abstract class AbstractIntegrationTest : AbstractTest
     {
         protected void AssertHashDatasAreTheSame(IList<HashedFingerprint> firstHashDatas, IList<HashedFingerprint> secondHashDatas)
@@ -23,18 +20,10 @@
 
             for (int i = 0; i < firstHashDatas.Count; i++)
             {
-                for (int j = 0; j < firstHashDatas[i].SubFingerprint.Length; j++)
-                {
-                    Assert.AreEqual(firstHashDatas[i].SubFingerprint[j], secondHashDatas[i].SubFingerprint[j]);
-                }
-
-                for (int j = 0; j < firstHashDatas[i].HashBins.Length; j++)
-                {
-                    Assert.AreEqual(firstHashDatas[i].HashBins[j], secondHashDatas[i].HashBins[j]);
-                }
-
+                CollectionAssert.AreEqual(firstHashDatas[i].SubFingerprint, secondHashDatas[i].SubFingerprint);
+                CollectionAssert.AreEqual(firstHashDatas[i].HashBins, secondHashDatas[i].HashBins);
                 Assert.AreEqual(firstHashDatas[i].SequenceNumber, secondHashDatas[i].SequenceNumber);
-                Assert.AreEqual(firstHashDatas[i].Timestamp, secondHashDatas[i].Timestamp, Epsilon);
+                Assert.AreEqual(firstHashDatas[i].StartsAt, secondHashDatas[i].StartsAt, Epsilon);
             }
         }
 
@@ -46,7 +35,7 @@
 
         private List<HashedFingerprint> SortHashesByFirstValueOfHashBin(IEnumerable<HashedFingerprint> hashDatasFromFile)
         {
-            return hashDatasFromFile.OrderBy(hashData => hashData.HashBins[0]).ToList();
+            return hashDatasFromFile.OrderBy(hashData => hashData.SequenceNumber).ToList();
         }
     }
 }

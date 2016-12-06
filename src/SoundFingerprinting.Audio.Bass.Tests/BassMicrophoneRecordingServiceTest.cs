@@ -2,13 +2,11 @@
 {
     using System;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     using Moq;
 
-    using SoundFingerprinting.Tests;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class BassMicrophoneRecordingServiceTest : AbstractTest
     {
         private BassSoundCaptureService soundCaptureService;
@@ -17,7 +15,7 @@
         private Mock<IBassStreamFactory> streamFactory;
         private Mock<IBassResampler> resampler;
 
-        [TestInitialize]
+        [SetUp]
         public void SetUp()
         {
             proxy = new Mock<IBassServiceProxy>(MockBehavior.Strict);
@@ -27,7 +25,7 @@
             soundCaptureService = new BassSoundCaptureService(proxy.Object, streamFactory.Object, resampler.Object);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TearDown()
         {
             proxy.VerifyAll();
@@ -35,17 +33,16 @@
             resampler.VerifyAll();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BassException))]
+        [Test]
         public void RecordingIsNotSupported()
         {
             const int NoRecordingDevice = -1;
             proxy.Setup(p => p.GetRecordingDevice()).Returns(NoRecordingDevice);
 
-            soundCaptureService.ReadMonoSamples(SampleRate, 10);
+            Assert.Throws<BassException>(() => soundCaptureService.ReadMonoSamples(SampleRate, 10));
         }
 
-        [TestMethod]
+        [Test]
         public void TestReadMonoFromMicrophone()
         {
             const int NoRecordingDevice = 10;

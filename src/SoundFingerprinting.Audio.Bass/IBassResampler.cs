@@ -4,6 +4,6 @@ namespace SoundFingerprinting.Audio.Bass
 
     internal interface IBassResampler
     {
-        float[] Resample(int sourceStream, int sampleRate, int seconds, int startAt, Func<int, ISamplesProvider> getSamplesProvider);
+        float[] Resample(int sourceStream, int sampleRate, double seconds, double startAt, Func<int, ISamplesProvider> getSamplesProvider);
     }
 }
