@@ -41,7 +41,7 @@
 
         private BASSFlag GetDefaultFlags()
         {
-            return BASSFlag.BASS_STREAM_DECODE | BASSFlag.BASS_SAMPLE_MONO | BASSFlag.BASS_SAMPLE_FLOAT;
+            return BASSFlag.BASS_STREAM_DECODE | BASSFlag.BASS_SAMPLE_MONO | BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_SAMPLE_FX;
         }
 
         private bool IsStreamValid(int stream)

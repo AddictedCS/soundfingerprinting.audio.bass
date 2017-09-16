@@ -320,7 +320,7 @@ namespace SoundFingerprinting.Audio.Bass
             private void SetDefaultConfigs()
             {
                 /*Set filter for anti aliasing*/
-                if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_MIXER_FILTER, 50))
+                if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_SRC, 3))
                 {
                     throw new BassException(proxy.GetLastError());
                 }

@@ -31,7 +31,7 @@
     </Exec>
 </Target>
 
-<Target Name = "PackageAudioBassLib" DependsOnTargets="RunAudioBassTests">
+<Target Name = "PackageAudioBassLib">
 	<Exec Command="&quot;$(NugetExecutable)&quot; pack $(SoundFingerprintingAudioBassProject) -Build -Properties Configuration=$(Configuration)" />
 </Target>
 

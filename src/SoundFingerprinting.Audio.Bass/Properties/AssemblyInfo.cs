@@ -15,4 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 [assembly: InternalsVisibleTo("SoundFingerprinting.Audio.Bass.Tests")]
 [assembly: AssemblyVersion("3.1.1")]
-[assembly: AssemblyInformationalVersion("3.1.1-alpha")]
+[assembly: AssemblyInformationalVersion("3.1.1-alpha6")]

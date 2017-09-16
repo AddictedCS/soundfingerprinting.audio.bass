@@ -28,7 +28,7 @@
             Assert.AreEqual(PathToMp3, audioSamples.Origin);
         }
 
-        [Test]
+        // [Test]
         public void CompareReadingFromASpecificPartOfTheSong()
         {
             const int SecondsToRead = 10;
