@@ -137,6 +137,11 @@ namespace SoundFingerprinting.Audio.Bass
             return Bass.BASS_ChannelSetPosition(stream, seekToSecond);
         }
 
+        public bool ChannelSetAttribute(int stream, BASSAttribute attribute, float value)
+        {
+            return Bass.BASS_ChannelSetAttribute(stream, attribute, value);
+        }
+
         public int ChannelGetData(int stream, float[] buffer, int lengthInBytes)
         {
             return Bass.BASS_ChannelGetData(stream, buffer, lengthInBytes);
@@ -298,10 +303,10 @@ namespace SoundFingerprinting.Audio.Bass
 
             private void InitializeBassLibraryWithAudioDevices()
             {
-                if (!proxy.Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT | BASSInit.BASS_DEVICE_MONO))
+                if (!proxy.Init(-1, 5512, BASSInit.BASS_DEVICE_DEFAULT | BASSInit.BASS_DEVICE_MONO))
                 {
                     Trace.WriteLine("Failed to find a sound device on running machine. Playing audio files will not be supported. " + proxy.GetLastError(), "Warning");
-                    if (!proxy.Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT | BASSInit.BASS_DEVICE_MONO))
+                    if (!proxy.Init(0, 5512, BASSInit.BASS_DEVICE_DEFAULT | BASSInit.BASS_DEVICE_MONO))
                     {
                         throw new BassException(proxy.GetLastError());
                     }
