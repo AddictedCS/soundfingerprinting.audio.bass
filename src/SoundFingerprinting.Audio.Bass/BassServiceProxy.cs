@@ -286,11 +286,6 @@ namespace SoundFingerprinting.Audio.Bass
                     throw new BassException("Could not load bassmix library from the following path: " + targetPath);
                 }
 
-               /* if (!proxy.BassFxLoadMe(targetPath))
-                {
-                    throw new BassException("Could not load bassfx library from the following path: " + targetPath);
-                } */
-
                 DummyCallToLoadBassLibraries();
             }
 
@@ -298,7 +293,6 @@ namespace SoundFingerprinting.Audio.Bass
             {
                 proxy.GetVersion();
                 proxy.GetMixerVersion();
-                // proxy.GetFxVersion();
             }
 
             private void InitializeBassLibraryWithAudioDevices()
@@ -325,12 +319,7 @@ namespace SoundFingerprinting.Audio.Bass
             private void SetDefaultConfigs()
             {
                 /*Set filter for anti aliasing*/
-                if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_SRC, 8))
-                {
-                    throw new BassException(proxy.GetLastError());
-                }
-
-                if(!proxy.SetConfig(BASSConfig.BASS_CONFIG_CURVE_VOL, true))
+                if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_SRC, 4))
                 {
                     throw new BassException(proxy.GetLastError());
                 }

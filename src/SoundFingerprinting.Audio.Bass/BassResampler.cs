@@ -32,7 +32,7 @@
                // int fxLowFilter = Bass.BASS_ChannelSetFX(streamFX, BASSFXType.BASS_FX_BFX_BQF, 1);
                // BASS_BFX_BQF lowFilter = new BASS_BFX_BQF { lFilter = BASSBFXBQF.BASS_BFX_BQF_LOWPASS, fCenter = 5512, fBandwidth = 6 };
                // Bass.BASS_FXSetParameters(fxLowFilter, lowFilter);
-                proxy.ChannelSetAttribute(mixerStream, BASSAttribute.BASS_ATTRIB_SRC, 8);
+                proxy.ChannelSetAttribute(mixerStream, BASSAttribute.BASS_ATTRIB_SRC, 4);
                 CombineStreams(mixerStream, sourceStream);
                 float[] samples = samplesAggregator.ReadSamplesFromSource(getSamplesProvider(mixerStream), seconds, sampleRate);
                 return samples;
