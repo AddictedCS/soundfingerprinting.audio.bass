@@ -22,8 +22,9 @@ namespace SoundFingerprinting.Audio.Bass
 
         public float[] ReadMonoSamples(string url, int sampleRate, int secondsToRead)
         {
+            const int DefaultResamplerQuality = 4;
             int stream = streamFactory.CreateStreamFromStreamingUrl(url);
-            return bassResampler.Resample(stream, sampleRate, secondsToRead, 0, mixerStream => new ContinuousStreamSamplesProvider(new BassSamplesProvider(proxy, mixerStream)));
+            return bassResampler.Resample(stream, sampleRate, secondsToRead, 0, DefaultResamplerQuality, mixerStream => new ContinuousStreamSamplesProvider(new BassSamplesProvider(proxy, mixerStream)));
         }
     }
 }

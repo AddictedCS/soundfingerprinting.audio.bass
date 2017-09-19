@@ -19,17 +19,29 @@
         private readonly IBassServiceProxy proxy;
         private readonly IBassStreamFactory streamFactory;
         private readonly IBassResampler resampler;
+        private readonly int resampleQuality;
 
-        public BassAudioService()
-            : this(DependencyResolver.Current.Get<IBassServiceProxy>(), DependencyResolver.Current.Get<IBassStreamFactory>(), DependencyResolver.Current.Get<IBassResampler>())
+        /// <summary>
+        ///  Initializes a new instance of the <see cref="BassAudioService"/> class. 
+        /// </summary>
+        /// <param name="resamplerQuality">
+        /// Resampler quality  0 (or below) = 4 points, 1 = 8 points, 2 = 16 points, 3 = 32 points, 4 = 64 points, 5 = 128 points, 6 (or above) = 256 points
+        /// </param>
+        public BassAudioService(int resamplerQuality = 4)
+            : this(
+                resamplerQuality, 
+                DependencyResolver.Current.Get<IBassServiceProxy>(),
+                DependencyResolver.Current.Get<IBassStreamFactory>(),
+                DependencyResolver.Current.Get<IBassResampler>())
         {
         }
 
-        internal BassAudioService(IBassServiceProxy proxy, IBassStreamFactory streamFactory, IBassResampler resampler)
+        internal BassAudioService(int resampleQuality, IBassServiceProxy proxy, IBassStreamFactory streamFactory, IBassResampler resampler)
         {
             this.proxy = proxy;
             this.streamFactory = streamFactory;
             this.resampler = resampler;
+            this.resampleQuality = resampleQuality;
         }
 
         public override IReadOnlyCollection<string> SupportedFormats
@@ -43,7 +55,7 @@
         public override AudioSamples ReadMonoSamplesFromFile(string pathToSourceFile, int sampleRate, double seconds, double startAt)
         {
             int stream = streamFactory.CreateStream(pathToSourceFile);
-            float[] samples = resampler.Resample(stream, sampleRate, seconds, startAt, mixerStream => new BassSamplesProvider(proxy, mixerStream));
+            float[] samples = resampler.Resample(stream, sampleRate, seconds, startAt, resampleQuality, mixerStream => new BassSamplesProvider(proxy, mixerStream));
             return new AudioSamples(samples, pathToSourceFile, sampleRate);
         }
     }

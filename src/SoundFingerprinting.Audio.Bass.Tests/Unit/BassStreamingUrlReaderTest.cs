@@ -40,7 +40,7 @@ namespace SoundFingerprinting.Audio.Bass.Tests.Unit
             const int StreamId = 100;
             float[] samplesToReturn = new float[1024];
             streamFactory.Setup(f => f.CreateStreamFromStreamingUrl("url-to-streaming-resource")).Returns(StreamId);
-            resampler.Setup(r => r.Resample(StreamId, SampleRate, 30, 0, It.IsAny<Func<int, ISamplesProvider>>())).Returns(samplesToReturn);
+            resampler.Setup(r => r.Resample(StreamId, SampleRate, 30, 0, It.IsAny<int>(), It.IsAny<Func<int, ISamplesProvider>>())).Returns(samplesToReturn);
 
             var samples = streamingUrlReader.ReadMonoSamples("url-to-streaming-resource", SampleRate, 30);
 

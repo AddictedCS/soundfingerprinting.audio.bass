@@ -1,12 +1,10 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.Tests.Unit
 {
-    using System;
     using System.Collections.Generic;
 
     using Moq;
 
     using NUnit.Framework;
-    using NUnit.Framework.Internal;
 
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
@@ -19,9 +17,7 @@
         private BassResampler resampler;
 
         private Mock<IBassServiceProxy> proxy;
-
         private Mock<IBassStreamFactory> streamFactory;
-
         private Mock<ISamplesAggregator> samplesAggregator;
 
         [SetUp]
@@ -49,16 +45,18 @@
             const int MixerStream = 101;
             const int Seconds = 50;
             const int StartAt = 0;
+            const int ResamplerQuality = 5;
             float[] samplesToReturn = new float[1024];
 
             streamFactory.Setup(f => f.CreateMixerStream(SampleRate)).Returns(MixerStream);
             proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BASSFlag.BASS_SAMPLE_FLOAT)).Returns(true);
             proxy.Setup(p => p.FreeStream(SourceStream)).Returns(true);
             proxy.Setup(p => p.FreeStream(MixerStream)).Returns(true);
+            proxy.Setup(p => p.ChannelSetAttribute(MixerStream, BASSAttribute.BASS_ATTRIB_SRC, ResamplerQuality)).Returns(true);
             samplesAggregator.Setup(s => s.ReadSamplesFromSource(It.IsAny<ISamplesProvider>(), Seconds, SampleRate))
                 .Returns(samplesToReturn);
             var queue = new Queue<float[]>(new[] { samplesToReturn });
-            float[] samples = resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, mixerStream => new QueueSamplesProvider(queue));
+            float[] samples = resampler.Resample(SourceStream, SampleRate, Seconds, StartAt, ResamplerQuality, mixerStream => new QueueSamplesProvider(queue));
 
             Assert.AreEqual(samplesToReturn.Length, samples.Length);
         }
@@ -70,12 +68,14 @@
             const int MixerStream = 101;
             const int Seconds = 50;
             const int StartAt = 0;
+            const int ResamplerQuality = 5;
 
             streamFactory.Setup(f => f.CreateMixerStream(SampleRate)).Returns(MixerStream);
             proxy.Setup(p => p.FreeStream(SourceStream)).Returns(true);
             proxy.Setup(p => p.FreeStream(MixerStream)).Returns(true);
             proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BASSFlag.BASS_SAMPLE_FLOAT)).Returns(false);
             proxy.Setup(p => p.GetLastError()).Returns("Combining streams failed");
+            proxy.Setup(p => p.ChannelSetAttribute(MixerStream, BASSAttribute.BASS_ATTRIB_SRC, ResamplerQuality)).Returns(true);
 
             var queue = new Queue<float[]>(new[] { new float[0] });
 
@@ -86,6 +86,7 @@
                         SampleRate,
                         Seconds,
                         StartAt,
+                        ResamplerQuality,
                         mixerStream => new QueueSamplesProvider(queue)));
         }
 
@@ -95,6 +96,7 @@
             const int SourceStream = 100;
             const int Seconds = 50;
             const int StartAt = 10;
+            const int ResamplerQuality = 5;
 
             proxy.Setup(p => p.ChannelSetPosition(SourceStream, StartAt)).Returns(false);
             proxy.Setup(p => p.GetLastError()).Returns("Failed to seek to a specific second");
@@ -107,6 +109,7 @@
                         SampleRate,
                         Seconds,
                         StartAt,
+                        ResamplerQuality,
                         mixerStream => new QueueSamplesProvider(new Queue<float[]>())));
         }
     }

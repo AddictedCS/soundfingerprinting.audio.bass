@@ -25,7 +25,7 @@
             streamFactory = new Mock<IBassStreamFactory>(MockBehavior.Strict);
             resampler = new Mock<IBassResampler>(MockBehavior.Strict);
 
-            audioService = new BassAudioService(proxy.Object, streamFactory.Object, resampler.Object);
+            audioService = new BassAudioService(5, proxy.Object, streamFactory.Object, resampler.Object);
         }
 
         [TearDown]
@@ -42,7 +42,7 @@
             const int StreamId = 100;
             float[] samplesToReturn = new float[1024];
             streamFactory.Setup(f => f.CreateStream("path-to-file")).Returns(StreamId);
-            resampler.Setup(r => r.Resample(StreamId, SampleRate, 0, 0, It.IsAny<Func<int, ISamplesProvider>>()))
+            resampler.Setup(r => r.Resample(StreamId, SampleRate, 0, 0, It.IsAny<int>(), It.IsAny<Func<int, ISamplesProvider>>()))
                 .Returns(samplesToReturn);
 
             var samples = audioService.ReadMonoSamplesFromFile("path-to-file", SampleRate);
@@ -56,7 +56,7 @@
             const int StreamId = 100;
             float[] samplesToReturn = new float[1024];
             streamFactory.Setup(f => f.CreateStream("path-to-file")).Returns(StreamId);
-            resampler.Setup(r => r.Resample(StreamId, SampleRate, 10, 20, It.IsAny<Func<int, ISamplesProvider>>())).Returns(samplesToReturn);
+            resampler.Setup(r => r.Resample(StreamId, SampleRate, 10, 20, It.IsAny<int>(), It.IsAny<Func<int, ISamplesProvider>>())).Returns(samplesToReturn);
 
             var samples = audioService.ReadMonoSamplesFromFile("path-to-file", SampleRate, 10, 20);
 

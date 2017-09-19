@@ -319,10 +319,10 @@ namespace SoundFingerprinting.Audio.Bass
             private void SetDefaultConfigs()
             {
                 /*Set filter for anti aliasing*/
-                if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_SRC, 4))
+                /* if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_SRC, 4))
                 {
                     throw new BassException(proxy.GetLastError());
-                }
+                } */
 
                 /*Set floating parameters to be passed*/
                 if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_FLOATDSP, true))
