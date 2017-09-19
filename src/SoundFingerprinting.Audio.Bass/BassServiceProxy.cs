@@ -137,6 +137,11 @@ namespace SoundFingerprinting.Audio.Bass
             return Bass.BASS_ChannelSetPosition(stream, seekToSecond);
         }
 
+        public bool ChannelSetAttribute(int stream, BASSAttribute attribute, float value)
+        {
+            return Bass.BASS_ChannelSetAttribute(stream, attribute, value);
+        }
+
         public int ChannelGetData(int stream, float[] buffer, int lengthInBytes)
         {
             return Bass.BASS_ChannelGetData(stream, buffer, lengthInBytes);
@@ -281,10 +286,10 @@ namespace SoundFingerprinting.Audio.Bass
                     throw new BassException("Could not load bassmix library from the following path: " + targetPath);
                 }
 
-                if (!proxy.BassFxLoadMe(targetPath))
+               /* if (!proxy.BassFxLoadMe(targetPath))
                 {
                     throw new BassException("Could not load bassfx library from the following path: " + targetPath);
-                }
+                } */
 
                 DummyCallToLoadBassLibraries();
             }
@@ -293,7 +298,7 @@ namespace SoundFingerprinting.Audio.Bass
             {
                 proxy.GetVersion();
                 proxy.GetMixerVersion();
-                proxy.GetFxVersion();
+                // proxy.GetFxVersion();
             }
 
             private void InitializeBassLibraryWithAudioDevices()
@@ -320,7 +325,12 @@ namespace SoundFingerprinting.Audio.Bass
             private void SetDefaultConfigs()
             {
                 /*Set filter for anti aliasing*/
-                if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_SRC, 3))
+                if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_SRC, 8))
+                {
+                    throw new BassException(proxy.GetLastError());
+                }
+
+                if(!proxy.SetConfig(BASSConfig.BASS_CONFIG_CURVE_VOL, true))
                 {
                     throw new BassException(proxy.GetLastError());
                 }
