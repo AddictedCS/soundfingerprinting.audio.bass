@@ -50,6 +50,8 @@
 
         bool ChannelSetPosition(int stream, double seekToSecond);
 
+        bool ChannelSetAttribute(int stream, BASSAttribute attribute, float value);
+
         int ChannelGetData(int stream, float[] buffer, int lengthInBytes);
 
         bool FreeStream(int stream);

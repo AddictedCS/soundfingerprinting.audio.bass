@@ -22,13 +22,14 @@ namespace SoundFingerprinting.Audio.Bass
 
         public float[] ReadMonoSamples(int sampleRate, int secondsToRecord)
         {
+            const int DefaultResamplerQuality = 4;
             if (!IsRecordingSupported())
             {
                 throw new BassException("No recording device could be found un running machine");
             }
 
             int stream = streamFactory.CreateStreamFromMicrophone(sampleRate);
-            return bassResampler.Resample(stream, sampleRate, secondsToRecord, 0, mixerStream => new ContinuousStreamSamplesProvider(new BassSamplesProvider(proxy, mixerStream)));
+            return bassResampler.Resample(stream, sampleRate, secondsToRecord, 0, DefaultResamplerQuality, mixerStream => new ContinuousStreamSamplesProvider(new BassSamplesProvider(proxy, mixerStream)));
         }
 
         private bool IsRecordingSupported()

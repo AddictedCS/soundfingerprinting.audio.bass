@@ -19,13 +19,21 @@
             this.samplesAggregator = samplesAggregator;
         }
 
-        public float[] Resample(int sourceStream, int sampleRate, double seconds, double startAt, Func<int, ISamplesProvider> getSamplesProvider)
+        public float[] Resample(
+            int sourceStream,
+            int sampleRate,
+            double seconds, 
+            double startAt, 
+            int resampleQuality,
+            Func<int, ISamplesProvider> getSamplesProvider)
         {
             int mixerStream = 0;
             try
             {
                 SeekToSecondInCaseIfRequired(sourceStream, startAt);
+
                 mixerStream = streamFactory.CreateMixerStream(sampleRate);
+                proxy.ChannelSetAttribute(sourceStream, BASSAttribute.BASS_ATTRIB_SRC, resampleQuality);
                 CombineStreams(mixerStream, sourceStream);
                 return samplesAggregator.ReadSamplesFromSource(getSamplesProvider(mixerStream), seconds, sampleRate);
             }
@@ -49,7 +57,7 @@
 
         private void CombineStreams(int mixerStream, int stream)
         {
-            if (!proxy.CombineMixerStreams(mixerStream, stream, BASSFlag.BASS_MIXER_FILTER))
+            if (!proxy.CombineMixerStreams(mixerStream, stream, BASSFlag.BASS_SAMPLE_FLOAT))
             {
                 throw new BassException(proxy.GetLastError());
             }

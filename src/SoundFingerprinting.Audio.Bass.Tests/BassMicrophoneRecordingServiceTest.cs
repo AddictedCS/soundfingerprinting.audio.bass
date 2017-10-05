@@ -50,7 +50,7 @@
             const int StreamId = 100;
             float[] samplesToReturn = new float[1024];
             streamFactory.Setup(f => f.CreateStreamFromMicrophone(SampleRate)).Returns(StreamId);
-            resampler.Setup(r => r.Resample(StreamId, SampleRate, 30, 0, It.IsAny<Func<int, ISamplesProvider>>())).Returns(samplesToReturn);
+            resampler.Setup(r => r.Resample(StreamId, SampleRate, 30, 0, It.IsAny<int>(), It.IsAny<Func<int, ISamplesProvider>>())).Returns(samplesToReturn);
 
             var samples = soundCaptureService.ReadMonoSamples(SampleRate, 30);
 
