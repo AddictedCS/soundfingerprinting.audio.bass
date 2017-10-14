@@ -8,9 +8,9 @@
     <owners>$author$</owners>
     <projectUrl>https://github.com/AddictedCS/soundfingerprinting</projectUrl>
     <description>$description$</description>
-    <releaseNotes>Bass audio proxy released as a separte library for SoundFingerprinting project</releaseNotes>
-    <copyright>Copyright 2016 Sergiu Ciumac</copyright>
+    <copyright>Copyright 2017 Sergiu Ciumac</copyright>
     <tags>Audio Identification Fingerprinting Digital Signal Processing Music Recognition Data Mining Content Sound</tags>
+	<releaseNotes>Version 3.2.0 come with upgraded Un4seen.Bass libraries: 2.4.12. These come with a more accurate resampling which also can be controlled via constructor parameters. The default resapling quality is 4 (64 points interpolation). BassAudioService also provides a helper method which reads the length of an input file (useful for TrackData instantiation).</releaseNotes>
   </metadata>
   <files>
         <file src="bin\Release\SoundFingerprinting.Audio.dll" target="lib\net35" />
