@@ -44,6 +44,14 @@
             this.resampleQuality = resampleQuality;
         }
 
+        public override float GetLengthInSeconds(string pathToSourceFile)
+        {
+            int stream = streamFactory.CreateStream(pathToSourceFile);
+            double length = proxy.ChannelGetLengthInSeconds(stream);
+            proxy.FreeStream(stream);
+            return (float)length;
+        }
+
         public override IReadOnlyCollection<string> SupportedFormats
         {
             get

@@ -44,21 +44,20 @@
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SoundFingerprinting, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.1.2\lib\net45\SoundFingerprinting.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="protobuf-net, Version=2.3.2.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.3.2\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
-    <Reference Include="SoundFingerprinting.Audio, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.1.2\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SoundFingerprinting, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoundFingerprinting.3.2.0\lib\net45\SoundFingerprinting.dll</HintPath>
     </Reference>
-    <Reference Include="SoundFingerprinting.Audio.NAudio, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.1.2\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SoundFingerprinting.Audio, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoundFingerprinting.3.2.0\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
     </Reference>
-    <Reference Include="SoundFingerprinting.Infrastructure, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.3.1.2\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SoundFingerprinting.Audio.NAudio, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoundFingerprinting.3.2.0\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="SoundFingerprinting.Infrastructure, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoundFingerprinting.3.2.0\lib\net45\SoundFingerprinting.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

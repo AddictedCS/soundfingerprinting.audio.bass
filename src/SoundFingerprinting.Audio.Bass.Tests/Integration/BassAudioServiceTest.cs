@@ -20,6 +20,14 @@
         }
 
         [Test]
+        public void ShouldEstimateDurationCorrectly()
+        {
+            float duration = bassAudioService.GetLengthInSeconds(PathToMp3);
+
+            Assert.AreEqual(193.07, duration, 0.5);
+        }
+
+        [Test]
         public void DurationOfReadAudioIsCorrect()
         {
             var audioSamples = bassAudioService.ReadMonoSamplesFromFile(PathToMp3, SampleRate);
