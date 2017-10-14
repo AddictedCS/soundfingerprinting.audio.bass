@@ -52,7 +52,7 @@
             proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BASSFlag.BASS_SAMPLE_FLOAT)).Returns(true);
             proxy.Setup(p => p.FreeStream(SourceStream)).Returns(true);
             proxy.Setup(p => p.FreeStream(MixerStream)).Returns(true);
-            proxy.Setup(p => p.ChannelSetAttribute(MixerStream, BASSAttribute.BASS_ATTRIB_SRC, ResamplerQuality)).Returns(true);
+            proxy.Setup(p => p.ChannelSetAttribute(SourceStream, BASSAttribute.BASS_ATTRIB_SRC, ResamplerQuality)).Returns(true);
             samplesAggregator.Setup(s => s.ReadSamplesFromSource(It.IsAny<ISamplesProvider>(), Seconds, SampleRate))
                 .Returns(samplesToReturn);
             var queue = new Queue<float[]>(new[] { samplesToReturn });
@@ -68,14 +68,14 @@
             const int MixerStream = 101;
             const int Seconds = 50;
             const int StartAt = 0;
-            const int ResamplerQuality = 5;
+            const int ResamplerQuality = 4;
 
             streamFactory.Setup(f => f.CreateMixerStream(SampleRate)).Returns(MixerStream);
             proxy.Setup(p => p.FreeStream(SourceStream)).Returns(true);
             proxy.Setup(p => p.FreeStream(MixerStream)).Returns(true);
             proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BASSFlag.BASS_SAMPLE_FLOAT)).Returns(false);
             proxy.Setup(p => p.GetLastError()).Returns("Combining streams failed");
-            proxy.Setup(p => p.ChannelSetAttribute(MixerStream, BASSAttribute.BASS_ATTRIB_SRC, ResamplerQuality)).Returns(true);
+            proxy.Setup(p => p.ChannelSetAttribute(SourceStream, BASSAttribute.BASS_ATTRIB_SRC, ResamplerQuality)).Returns(true);
 
             var queue = new Queue<float[]>(new[] { new float[0] });
 
