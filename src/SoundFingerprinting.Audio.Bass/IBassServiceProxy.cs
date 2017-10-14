@@ -54,6 +54,8 @@
 
         int ChannelGetData(int stream, float[] buffer, int lengthInBytes);
 
+        double ChannelGetLengthInSeconds(int stream);
+
         bool FreeStream(int stream);
 
         bool PluginFree(int number);

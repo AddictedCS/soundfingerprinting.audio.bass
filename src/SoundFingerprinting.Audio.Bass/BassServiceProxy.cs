@@ -147,6 +147,12 @@ namespace SoundFingerprinting.Audio.Bass
             return Bass.BASS_ChannelGetData(stream, buffer, lengthInBytes);
         }
 
+        public double ChannelGetLengthInSeconds(int stream)
+        {
+            long bytes = Bass.BASS_ChannelGetLength(stream, BASSMode.BASS_POS_BYTES);
+            return Bass.BASS_ChannelBytes2Seconds(stream, bytes);
+        }
+
         public bool FreeStream(int stream)
         {
             if (!Bass.BASS_StreamFree(stream))

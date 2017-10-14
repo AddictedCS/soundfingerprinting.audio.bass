@@ -25,13 +25,13 @@
 	<Exec Command="&quot;$(NugetExecutable)&quot; install NUnit.Runners -Version $(NUnitVersion) -OutputDirectory testrunner" />
 </Target>
 
-<Target Name = "RunAudioBassTests" DependsOnTargets="InstallNUnit3ConsoleRunner">
+<Target Name = "RunAudioBassTests">
 	<Exec Command="$(NUnitTestRunner) $(UnitTestsOutputDir)\SoundFingerprinting.Audio.Bass.Tests.dll">
 		<Output TaskParameter="ExitCode" PropertyName="TestSuccessOrNot"/>
     </Exec>
 </Target>
 
-<Target Name = "PackageAudioBassLib">
+<Target Name = "PackageAudioBassLib" DependsOnTargets="InstallNUnit3ConsoleRunner;RunAudioBassTests">
 	<Exec Command="&quot;$(NugetExecutable)&quot; pack $(SoundFingerprintingAudioBassProject) -Build -Properties Configuration=$(Configuration)" />
 </Target>
 
