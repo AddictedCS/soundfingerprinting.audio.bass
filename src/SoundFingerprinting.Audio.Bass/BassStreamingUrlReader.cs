@@ -1,7 +1,5 @@
 namespace SoundFingerprinting.Audio.Bass
 {
-    using SoundFingerprinting.Infrastructure;
-
     public class BassStreamingUrlReader : IStreamingUrlReader
     {
         private readonly IBassServiceProxy proxy;
@@ -9,7 +7,13 @@ namespace SoundFingerprinting.Audio.Bass
         private readonly IBassResampler bassResampler;
 
         public BassStreamingUrlReader()
-            : this(DependencyResolver.Current.Get<IBassServiceProxy>(), DependencyResolver.Current.Get<IBassStreamFactory>(), DependencyResolver.Current.Get<IBassResampler>())
+            : this(
+                BassServiceProxy.Instance,
+                new BassStreamFactory(BassServiceProxy.Instance),
+                new BassResampler(
+                    BassServiceProxy.Instance,
+                    new BassStreamFactory(BassServiceProxy.Instance),
+                    new SamplesAggregator()))
         {
         }
 
