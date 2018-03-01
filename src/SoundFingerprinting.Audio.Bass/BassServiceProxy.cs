@@ -18,11 +18,13 @@ namespace SoundFingerprinting.Audio.Bass
 
     internal class BassServiceProxy : IBassServiceProxy
     {
+        private static readonly BassServiceProxy Singleton = new BassServiceProxy();
+
         private readonly BassLifetimeManager lifetimeManager;
 
         private bool alreadyDisposed;
 
-        public BassServiceProxy()
+        protected BassServiceProxy()
         {
             lifetimeManager = new BassLifetimeManager(this);
         }
@@ -30,6 +32,14 @@ namespace SoundFingerprinting.Audio.Bass
         ~BassServiceProxy()
         {
             Dispose(false);
+        }
+
+        public static BassServiceProxy Instance
+        {
+            get
+            {
+                return Singleton;
+            }
         }
 
         public void RegisterBass(string email, string registrationKey)

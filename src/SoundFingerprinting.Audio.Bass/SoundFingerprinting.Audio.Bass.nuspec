@@ -10,15 +10,12 @@
     <description>$description$</description>
     <copyright>Copyright 2017 Sergiu Ciumac</copyright>
     <tags>Audio Identification Fingerprinting Digital Signal Processing Music Recognition Data Mining Content Sound</tags>
-	<releaseNotes>Version 3.2.0 come with upgraded Un4seen.Bass libraries: 2.4.12. These come with a more accurate resampling which also can be controlled via constructor parameters. The default resapling quality is 4 (64 points interpolation). BassAudioService also provides a helper method which reads the length of an input file (useful for TrackData instantiation).</releaseNotes>
+	<releaseNotes>Version 4.1.0 comes with simplified internal interfaces, and removed Ninject dependency. Version 3.2.0 come with upgraded Un4seen.Bass libraries: 2.4.12. These come with a more accurate resampling which also can be controlled via constructor parameters. The default resapling quality is 4 (64 points interpolation). BassAudioService also provides a helper method which reads the length of an input file (useful for TrackData instantiation).</releaseNotes>
   </metadata>
   <files>
         <file src="bin\Release\SoundFingerprinting.Audio.dll" target="lib\net35" />
 		<file src="bin\Release\SoundFingerprinting.Audio.dll" target="lib\net40" />
 		<file src="bin\Release\SoundFingerprinting.Audio.dll" target="lib\net45" />
-		<file src="bin\Release\SoundFingerprinting.Infrastructure.dll" target="lib\net35" />
-		<file src="bin\Release\SoundFingerprinting.Infrastructure.dll" target="lib\net40" />
-		<file src="bin\Release\SoundFingerprinting.Infrastructure.dll" target="lib\net45" />
 		<file src="..\Externals\Bass.Net.dll" target="lib\net35" />
 		<file src="..\Externals\Bass.Net.dll" target="lib\net40" />
 		<file src="..\Externals\Bass.Net.dll" target="lib\net45" />

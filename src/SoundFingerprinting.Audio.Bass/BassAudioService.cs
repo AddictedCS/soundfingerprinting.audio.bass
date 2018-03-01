@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using SoundFingerprinting.Infrastructure;
-
     /// <summary>
     ///   Bass Audio Service
     /// </summary>
@@ -29,10 +27,13 @@
         /// </param>
         public BassAudioService(int resamplerQuality = 4)
             : this(
-                resamplerQuality, 
-                DependencyResolver.Current.Get<IBassServiceProxy>(),
-                DependencyResolver.Current.Get<IBassStreamFactory>(),
-                DependencyResolver.Current.Get<IBassResampler>())
+                resamplerQuality,
+                BassServiceProxy.Instance,
+                new BassStreamFactory(BassServiceProxy.Instance),
+                new BassResampler(
+                    BassServiceProxy.Instance,
+                    new BassStreamFactory(BassServiceProxy.Instance),
+                    new SamplesAggregator()))
         {
         }
 

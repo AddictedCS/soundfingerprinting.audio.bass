@@ -1,13 +1,11 @@
 ﻿namespace SoundFingerprinting.Audio.Bass
 {
-    using SoundFingerprinting.Infrastructure;
-
     public class BassTagService : ITagService
     {
         private readonly IBassServiceProxy bassServiceProxy;
 
         public BassTagService()
-            : this(DependencyResolver.Current.Get<IBassServiceProxy>())
+            : this(BassServiceProxy.Instance)
         {
         }
 

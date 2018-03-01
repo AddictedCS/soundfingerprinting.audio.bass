@@ -1,14 +1,19 @@
 namespace SoundFingerprinting.Audio.Bass
 {
-    using SoundFingerprinting.Infrastructure;
-
     public class BassSoundCaptureService : ISoundCaptureService
     {
         private readonly IBassServiceProxy proxy;
         private readonly IBassStreamFactory streamFactory;
         private readonly IBassResampler bassResampler;
 
-        public BassSoundCaptureService() : this(DependencyResolver.Current.Get<IBassServiceProxy>(), DependencyResolver.Current.Get<IBassStreamFactory>(), DependencyResolver.Current.Get<IBassResampler>())
+        public BassSoundCaptureService()
+            : this(
+                BassServiceProxy.Instance,
+                new BassStreamFactory(BassServiceProxy.Instance),
+                new BassResampler(
+                    BassServiceProxy.Instance,
+                    new BassStreamFactory(BassServiceProxy.Instance),
+                    new SamplesAggregator()))
         {
             // no op
         }

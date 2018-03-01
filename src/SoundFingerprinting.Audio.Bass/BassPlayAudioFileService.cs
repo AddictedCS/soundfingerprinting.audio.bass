@@ -1,7 +1,5 @@
 ﻿namespace SoundFingerprinting.Audio.Bass
 {
-    using SoundFingerprinting.Infrastructure;
-
     using Un4seen.Bass;
 
     public class BassPlayAudioFileService : IPlayAudioFileService
@@ -9,7 +7,7 @@
         private readonly IBassServiceProxy proxy;
 
         public BassPlayAudioFileService()
-            : this(DependencyResolver.Current.Get<IBassServiceProxy>())
+            : this(BassServiceProxy.Instance)
         {
         }
 
