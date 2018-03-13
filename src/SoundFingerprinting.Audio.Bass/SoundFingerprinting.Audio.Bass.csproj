@@ -1,90 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F143503-3592-4A71-8CE3-026D7E8B2AD7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SoundFingerprinting.Audio.Bass</RootNamespace>
-    <AssemblyName>SoundFingerprinting.Audio.Bass</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <TargetFrameworks>net45</TargetFrameworks>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<Authors>Sergiu Ciumac</Authors>
+	<PackageVersion>5.0.0</PackageVersion>
+	<PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+	<PackageProjectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageDescription>Un4seen.Basss extension library for SoundFingerprinting framework. SoundFingerprinting default library is designed to read only raw wave files. This extension provides the ability to read all files supported by Bass (including .mp3, .flac, .ogg). Since Bass depends on Windows native calls, this extension can execute only in Windows environment. Un4seen.Bass is free for non-comercial use. If you intend to use this extension for commercial purposes, please contact http://www.un4seen.com for licensing</PackageDescription>
+	<PackageTags>Audio Identification Fingerprinting Digital Signal Processing Music Recognition Data Mining Content Sound Shazam</PackageTags>
+	<PackageReleaseNotes>Version 5.0.0 corresponds to SoundFingerprinting-5.0.0</PackageReleaseNotes>
+    <NuspecFile>..\..\src\SoundFingerprinting.Audio.Bass\SoundFingerprinting.Audio.Bass.nuspec</NuspecFile>
+	<IncludeContentInPack>true</IncludeContentInPack>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Bass.Net, Version=2.4.6.4, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\Bass.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="protobuf-net, Version=2.3.2.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.2.3.2\lib\net40\protobuf-net.dll</HintPath>
-    </Reference>
-    <Reference Include="SoundFingerprinting, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.4.2.1\lib\net45\SoundFingerprinting.dll</HintPath>
-    </Reference>
-    <Reference Include="SoundFingerprinting.Audio, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.4.2.1\lib\net45\SoundFingerprinting.Audio.dll</HintPath>
-    </Reference>
-    <Reference Include="SoundFingerprinting.Audio.NAudio, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SoundFingerprinting.4.2.1\lib\net45\SoundFingerprinting.Audio.NAudio.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BassAudioService.cs" />
-    <Compile Include="BassConfigurationSection.cs" />
-    <Compile Include="BassConstants.cs" />
-    <Compile Include="BassSoundCaptureService.cs" />
-    <Compile Include="BassPlayAudioFileService.cs" />
-    <Compile Include="BassException.cs" />
-    <Compile Include="BassResampler.cs" />
-    <Compile Include="BassSamplesProvider.cs" />
-    <Compile Include="BassServiceProxy.cs" />
-    <Compile Include="BassStreamFactory.cs" />
-    <Compile Include="BassStreamingUrlReader.cs" />
-    <Compile Include="BassTagService.cs" />
-    <Compile Include="BassWaveFileUtility.cs" />
-    <Compile Include="IBassResampler.cs" />
-    <Compile Include="IBassServiceProxy.cs" />
-    <Compile Include="IBassStreamFactory.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="x64\bass.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="x64\bassflac.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -109,15 +41,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <PackageReference Include="SoundFingerprinting" Version="5.0.0-alpha" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <Reference Include="Bass.Net">
+      <HintPath>..\Externals\Bass.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
 </Project>

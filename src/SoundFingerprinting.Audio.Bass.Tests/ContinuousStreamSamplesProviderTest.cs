@@ -1,17 +1,18 @@
-﻿namespace SoundFingerprinting.Tests.Unit.Audio
+﻿namespace SoundFingerprinting.Audio.Bass.Tests
 {
     using System.Collections.Generic;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
     using SoundFingerprinting.Audio;
+    using SoundFingerprinting.Tests.Unit.Audio;
 
-    [TestClass]
+    [TestFixture]
     public class ContinuousStreamSamplesProviderTest
     {
         private ContinuousStreamSamplesProvider samplesProvider;
 
-        [TestMethod]
+        [Test]
         public void TestGetNextSamples()
         {
             float[] buffer = new float[1024];
