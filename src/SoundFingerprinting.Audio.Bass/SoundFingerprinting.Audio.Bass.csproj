@@ -8,7 +8,7 @@
 	<PackageProjectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
-	<PackageDescription>Un4seen.Basss extension library for SoundFingerprinting framework. SoundFingerprinting default library is designed to read only raw wave files. This extension provides the ability to read all files supported by Bass (including .mp3, .flac, .ogg). Since Bass depends on Windows native calls, this extension can execute only in Windows environment. Un4seen.Bass is free for non-comercial use. If you intend to use this extension for commercial purposes, please contact http://www.un4seen.com for licensing</PackageDescription>
+	<PackageDescription>Un4seen.Bass extension library for SoundFingerprinting framework. SoundFingerprinting default library is designed to read only raw wave files. This extension provides the ability to read all files supported by Bass (including .mp3, .flac, .ogg). Since Bass depends on Windows native calls, this extension can execute only in Windows environment. Un4seen.Bass is free for non-comercial use. If you intend to use this extension for commercial purposes, please contact http://www.un4seen.com for licensing</PackageDescription>
 	<PackageTags>Audio Identification Fingerprinting Digital Signal Processing Music Recognition Data Mining Content Sound Shazam</PackageTags>
 	<PackageReleaseNotes>Version 5.0.0 corresponds to SoundFingerprinting-5.0.0</PackageReleaseNotes>
     <NuspecFile>..\..\src\SoundFingerprinting.Audio.Bass\SoundFingerprinting.Audio.Bass.nuspec</NuspecFile>
@@ -41,7 +41,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SoundFingerprinting" Version="5.0.0-alpha" />
+    <PackageReference Include="SoundFingerprinting" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bass.Net">
