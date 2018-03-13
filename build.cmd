@@ -6,4 +6,4 @@ if "%config%" == "" (
 
 dotnet restore .\src\SoundFingerprinting.Audio.Bass.sln
 dotnet test .\src\SoundFingerprinting.Audio.Bass.Tests\SoundFingerprinting.Audio.Bass.Tests.csproj -c %config%
-dotnet pack .\src\SoundFingerprinting.Audio.Bass\SoundFingerprinting.Audio.Bass.csproj -c %config% -o ..\..\build /p:NuspecFile=.\src\SoundFingerprinting.Audio.Bass\SoundFingerprinting.Audio.Bass.nuspec
+dotnet pack .\src\SoundFingerprinting.Audio.Bass\SoundFingerprinting.Audio.Bass.csproj -c %config% -o ..\..\build -v n
