@@ -1,26 +1,32 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
-    <projectUrl>https://github.com/AddictedCS/soundfingerprinting</projectUrl>
-    <description>$description$</description>
-    <copyright>Copyright 2017 Sergiu Ciumac</copyright>
+    <id>SoundFingerprinting.Audio.Bass</id>
+    <version>5.0.0</version>
+    <authors>Sergiu Ciumac</authors>
+    <owners>Sergiu Ciumac</owners>
+    <projectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</projectUrl>
+    <description>SoundFingerprinting.Audio.Bass is an extension which provides a more powerful audio service for SoundFingerprinting framework. Un4seen.Bass is able to read a multitude of formats .mp3, .ogg, .flac. Free for non-commercial use.</description>
+    <copyright>Copyright 2018 Sergiu Ciumac</copyright>
     <tags>Audio Identification Fingerprinting Digital Signal Processing Music Recognition Data Mining Content Sound</tags>
-	<releaseNotes>Version 4.1.0 comes with simplified internal interfaces, and removed Ninject dependency. Version 3.2.0 come with upgraded Un4seen.Bass libraries: 2.4.12. These come with a more accurate resampling which also can be controlled via constructor parameters. The default resapling quality is 4 (64 points interpolation). BassAudioService also provides a helper method which reads the length of an input file (useful for TrackData instantiation).</releaseNotes>
+	<releaseNotes>Version 5.0.0 corresponds to updates written in SoundFingerprinting 5.0.0. Version 4.1.0 comes with simplified internal interfaces, and removed Ninject dependency. Version 3.2.0 come with upgraded Un4seen.Bass libraries: 2.4.12. These come with a more accurate resampling which also can be controlled via constructor parameters. The default resapling quality is 4 (64 points interpolation). BassAudioService also provides a helper method which reads the length of an input file (useful for TrackData instantiation).</releaseNotes>
   </metadata>
+  <dependencies>
+	  <group targetFramework=".NETFramework4.5">
+		<dependency id="SoundFingerprinting" version="5.0.0-alpha" exclude="Build,Analyzers" />
+	  </group>
+  </dependencies>
   <files>
-        <file src="bin\Release\SoundFingerprinting.Audio.dll" target="lib\net35" />
-		<file src="bin\Release\SoundFingerprinting.Audio.dll" target="lib\net40" />
-		<file src="bin\Release\SoundFingerprinting.Audio.dll" target="lib\net45" />
-		<file src="..\Externals\Bass.Net.dll" target="lib\net35" />
-		<file src="..\Externals\Bass.Net.dll" target="lib\net40" />
+        <file src="x64\bass.dll" target="content\x64" />
+		<file src="x64\bassflac.dll" target="content\x64" />
+		<file src="x64\bassmix.dll" target="content\x64" />
+		<file src="x64\tags.dll" target="content\x64" />
+		<file src="x86\bass.dll" target="content\x86" />
+		<file src="x86\bassflac.dll" target="content\x86" />
+		<file src="x86\bassmix.dll" target="content\x86" />
+		<file src="x86\tags.dll" target="content\x86" />
+		<file src="bin\Release\net45\SoundFingerprinting.Audio.Bass.dll" target="lib\net45" />
 		<file src="..\Externals\Bass.Net.dll" target="lib\net45" />
-		<file src="..\Scripts\BassPackage\*.ps1" target="tools\net35" />
-		<file src="..\Scripts\BassPackage\*.ps1" target="tools\net40" />
 		<file src="..\Scripts\BassPackage\*.ps1" target="tools\net45" />
    </files>
 </package>
