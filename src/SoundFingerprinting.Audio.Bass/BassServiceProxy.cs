@@ -18,8 +18,6 @@ namespace SoundFingerprinting.Audio.Bass
 
     internal class BassServiceProxy : IBassServiceProxy
     {
-        private static readonly BassServiceProxy Singleton = new BassServiceProxy();
-
         private readonly BassLifetimeManager lifetimeManager;
 
         private bool alreadyDisposed;
@@ -34,13 +32,7 @@ namespace SoundFingerprinting.Audio.Bass
             Dispose(false);
         }
 
-        public static BassServiceProxy Instance
-        {
-            get
-            {
-                return Singleton;
-            }
-        }
+        public static BassServiceProxy Instance { get; } = new BassServiceProxy();
 
         public void RegisterBass(string email, string registrationKey)
         {
@@ -145,6 +137,11 @@ namespace SoundFingerprinting.Audio.Bass
         public bool ChannelSetPosition(int stream, double seekToSecond)
         {
             return Bass.BASS_ChannelSetPosition(stream, seekToSecond);
+        }
+
+        public int ChannelSetFx(int stream, BASSFXType aSSFXType, int priority)
+        {
+            return Bass.BASS_ChannelSetFX(stream, aSSFXType, priority);
         }
 
         public bool ChannelSetAttribute(int stream, BASSAttribute attribute, float value)

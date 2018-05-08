@@ -52,6 +52,8 @@
 
         bool ChannelSetAttribute(int stream, BASSAttribute attribute, float value);
 
+        int ChannelSetFx(int stream, BASSFXType aSSFXType, int priority);
+
         int ChannelGetData(int stream, float[] buffer, int lengthInBytes);
 
         double ChannelGetLengthInSeconds(int stream);
