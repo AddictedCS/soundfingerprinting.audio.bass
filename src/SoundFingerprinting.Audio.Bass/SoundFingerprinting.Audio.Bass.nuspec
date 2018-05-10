@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>SoundFingerprinting.Audio.Bass</id>
-    <version>5.2.0</version>
+    <version>5.2.1</version>
     <authors>Sergiu Ciumac</authors>
     <owners>Sergiu Ciumac</owners>
     <projectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</projectUrl>
@@ -13,11 +13,11 @@
   </metadata>
   <dependencies>
 	  <group targetFramework=".NETFramework4.5">
-		<dependency id="SoundFingerprinting" version="5.2.0" exclude="Build,Analyzers" />
+		<dependency id="SoundFingerprinting" version="5.2.1" exclude="Build,Analyzers" />
 	  </group>
   </dependencies>
   <files>
-        <file src="x64\bass.dll" target="content\x64" />
+    <file src="x64\bass.dll" target="content\x64" />
 		<file src="x64\bassflac.dll" target="content\x64" />
 		<file src="x64\bassmix.dll" target="content\x64" />
 		<file src="x64\tags.dll" target="content\x64" />
@@ -28,5 +28,5 @@
 		<file src="bin\Release\net45\SoundFingerprinting.Audio.Bass.dll" target="lib\net45" />
 		<file src="..\Externals\Bass.Net.dll" target="lib\net45" />
 		<file src="..\Scripts\BassPackage\*.ps1" target="tools\net45" />
-   </files>
+  </files>
 </package>
