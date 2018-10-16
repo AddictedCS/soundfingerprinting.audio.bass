@@ -17,7 +17,7 @@
 	  </group>
   </dependencies>
   <files>
-    <file src="x64\bass.dll" target="content\x64" />
+		<file src="x64\bass.dll" target="content\x64" />
 		<file src="x64\bassflac.dll" target="content\x64" />
 		<file src="x64\bassmix.dll" target="content\x64" />
 		<file src="x64\tags.dll" target="content\x64" />
@@ -25,6 +25,8 @@
 		<file src="x86\bassflac.dll" target="content\x86" />
 		<file src="x86\bassmix.dll" target="content\x86" />
 		<file src="x86\tags.dll" target="content\x86" />
+		<file src="osx\libbassmix.dylib" target="content\osx" />
+		<file src="osx\libbass.dylib" target="content\osx" />
 		<file src="bin\Release\net45\SoundFingerprinting.Audio.Bass.dll" target="lib\net45" />
 		<file src="..\Externals\Bass.Net.dll" target="lib\net45" />
 		<file src="..\Scripts\BassPackage\*.ps1" target="tools\net45" />
