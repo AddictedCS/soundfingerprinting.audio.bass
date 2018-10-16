@@ -12,9 +12,7 @@
 	<releaseNotes>Version 5.0.0 corresponds to updates written in SoundFingerprinting 5.0.0. Version 4.1.0 comes with simplified internal interfaces, and removed Ninject dependency. Version 3.2.0 come with upgraded Un4seen.Bass libraries: 2.4.12. These come with a more accurate resampling which also can be controlled via constructor parameters. The default resapling quality is 4 (64 points interpolation). BassAudioService also provides a helper method which reads the length of an input file (useful for TrackData instantiation).</releaseNotes>
   </metadata>
   <dependencies>
-	  <group targetFramework=".NETFramework4.5">
-		<dependency id="SoundFingerprinting" version="5.2.3" exclude="Build,Analyzers" />
-	  </group>
+	  <dependency id="SoundFingerprinting" version="5.2.3" exclude="Build,Analyzers" />
   </dependencies>
   <files>
 		<file src="x64\bass.dll" target="content\x64" />
@@ -27,8 +25,8 @@
 		<file src="x86\tags.dll" target="content\x86" />
 		<file src="osx\libbassmix.dylib" target="content\osx" />
 		<file src="osx\libbass.dylib" target="content\osx" />
-		<file src="bin\Release\net45\SoundFingerprinting.Audio.Bass.dll" target="lib\net45" />
-		<file src="..\Externals\Bass.Net.dll" target="lib\net45" />
-		<file src="..\Scripts\BassPackage\*.ps1" target="tools\net45" />
+		<file src="bin\Release\net45\SoundFingerprinting.Audio.Bass.dll" target="lib" />
+		<file src="..\Externals\Bass.Net.dll" target="lib" />
+		<file src="..\Scripts\BassPackage\*.ps1" target="tools" />
   </files>
 </package>
