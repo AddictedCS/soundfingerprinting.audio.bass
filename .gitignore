@@ -19,3 +19,4 @@ packages*/
 *.exe
 !NuGet.exe
 build/
+.vs/

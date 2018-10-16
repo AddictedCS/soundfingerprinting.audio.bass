@@ -12,7 +12,6 @@ namespace SoundFingerprinting.Audio.Bass
     using System.Web.Configuration;
 
     using Un4seen.Bass;
-    using Un4seen.Bass.AddOn.Fx;
     using Un4seen.Bass.AddOn.Mix;
     using Un4seen.Bass.AddOn.Tags;
 
@@ -49,11 +48,6 @@ namespace SoundFingerprinting.Audio.Bass
             return BassMix.LoadMe(targetPath);
         }
 
-        public bool BassFxLoadMe(string targetPath)
-        {
-            return BassFx.LoadMe(targetPath);
-        }
-
         public int GetVersion()
         {
             return Bass.BASS_GetVersion();
@@ -62,11 +56,6 @@ namespace SoundFingerprinting.Audio.Bass
         public int GetMixerVersion()
         {
             return BassMix.BASS_Mixer_GetVersion();
-        }
-
-        public int GetFxVersion()
-        {
-            return BassFx.BASS_FX_GetVersion();
         }
 
         public IDictionary<int, string> PluginLoadDirectory(string path)
@@ -139,11 +128,6 @@ namespace SoundFingerprinting.Audio.Bass
             return Bass.BASS_ChannelSetPosition(stream, seekToSecond);
         }
 
-        public int ChannelSetFx(int stream, BASSFXType aSSFXType, int priority)
-        {
-            return Bass.BASS_ChannelSetFX(stream, aSSFXType, priority);
-        }
-
         public bool ChannelSetAttribute(int stream, BASSAttribute attribute, float value)
         {
             return Bass.BASS_ChannelSetAttribute(stream, attribute, value);
@@ -164,9 +148,7 @@ namespace SoundFingerprinting.Audio.Bass
         {
             if (!Bass.BASS_StreamFree(stream))
             {
-                Trace.WriteLine(
-                    "Could not release stream " + stream + ". Possible memory leak! Bass Error: " + GetLastError(),
-                    "Error");
+                Trace.WriteLine("Could not release stream " + stream + ". Possible memory leak! Bass Error: " + GetLastError(), "Error");
                 return false;
             }
 
@@ -219,9 +201,19 @@ namespace SoundFingerprinting.Audio.Bass
                 if (IsBassLibraryHasToBeInitialized(Interlocked.Increment(ref initializedInstances)))
                 {
                     RegisterBassKey();
-                    string targetPath = GetTargetPathToLoadLibrariesFrom();
-                    LoadBassLibraries(targetPath);
-                    CheckIfFlacPluginIsLoaded(targetPath);
+
+                    if (Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix)
+                    {
+                        string targetPath = GetTargetPathToLoadLibrariesFrom();
+                        LoadBassLibraries(targetPath);
+                        CheckIfFlacPluginIsLoaded(targetPath);
+                    }
+                    else
+                    {
+                        // force loading the libs
+                        proxy.GetVersion();
+                    }
+
                     InitializeBassLibraryWithAudioDevices();
                     SetDefaultConfigs();
                     InitializeRecordingDevice();
@@ -279,12 +271,12 @@ namespace SoundFingerprinting.Audio.Bass
                 string executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
                 if (string.IsNullOrEmpty(executingPath))
                 {
-                    throw new BassException(
-                        "Executing path of the application is null or empty. Could not find folders with native DLL libraries.");
+                    throw new BassException("Executing path of the application is null or empty. Could not find folders with native DLL libraries.");
                 }
 
-                Uri uri = new Uri(executingPath);
-                return Path.Combine(uri.LocalPath, Utils.Is64Bit ? "x64" : "x86");
+                UriBuilder uri = new UriBuilder(executingPath);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.Combine(path, Utils.Is64Bit ? "x64" : "x86");
             }
 
             private void LoadBassLibraries(string targetPath)
@@ -331,13 +323,6 @@ namespace SoundFingerprinting.Audio.Bass
 
             private void SetDefaultConfigs()
             {
-                /*Set filter for anti aliasing*/
-                /* if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_SRC, 4))
-                {
-                    throw new BassException(proxy.GetLastError());
-                } */
-
-                /*Set floating parameters to be passed*/
                 if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_FLOATDSP, true))
                 {
                     throw new BassException(proxy.GetLastError());
@@ -349,10 +334,7 @@ namespace SoundFingerprinting.Audio.Bass
                 const int DefaultDevice = -1;
                 if (!proxy.RecordInit(DefaultDevice))
                 {
-                    Trace.WriteLine(
-                        "No default recording device could be found on running machine. Recording is not supported: "
-                        + proxy.GetLastError(),
-                        "Warning");
+                    Trace.WriteLine("No default recording device could be found on running machine. Recording is not supported: " + proxy.GetLastError(), "Warning");
                 }
             }
 
