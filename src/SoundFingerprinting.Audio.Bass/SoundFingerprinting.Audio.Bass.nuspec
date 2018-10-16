@@ -2,11 +2,11 @@
 <package >
   <metadata>
     <id>SoundFingerprinting.Audio.Bass</id>
-    <version>5.2.3</version>
+    <version>5.2.3.1</version>
     <authors>Sergiu Ciumac</authors>
     <owners>Sergiu Ciumac</owners>
     <projectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</projectUrl>
-    <description>SoundFingerprinting.Audio.Bass is an extension which provides a more powerful audio service for SoundFingerprinting framework. Un4seen.Bass is able to read a multitude of formats .mp3, .ogg, .flac. Free for non-commercial use.</description>
+    <description>Version 5.2.3.1 contains OSx libraries for Un4Seen.Bass in order to be able to create BassAudioService on classes that are running on Mono on OSX platform. SoundFingerprinting.Audio.Bass is an extension which provides a more powerful audio service for SoundFingerprinting framework. Un4seen.Bass is able to read a multitude of formats .mp3, .ogg, .flac. Free for non-commercial use.</description>
     <copyright>Copyright 2018 Sergiu Ciumac</copyright>
     <tags>Audio Identification Fingerprinting Digital Signal Processing Music Recognition Data Mining Content Sound</tags>
 	<releaseNotes>Version 5.0.0 corresponds to updates written in SoundFingerprinting 5.0.0. Version 4.1.0 comes with simplified internal interfaces, and removed Ninject dependency. Version 3.2.0 come with upgraded Un4seen.Bass libraries: 2.4.12. These come with a more accurate resampling which also can be controlled via constructor parameters. The default resapling quality is 4 (64 points interpolation). BassAudioService also provides a helper method which reads the length of an input file (useful for TrackData instantiation).</releaseNotes>
