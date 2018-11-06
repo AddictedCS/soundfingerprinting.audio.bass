@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net46;net461;net47</TargetFrameworks>
+    <TargetFrameworks>net45;</TargetFrameworks>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<Authors>Sergiu Ciumac</Authors>
-	<PackageVersion>5.2.3.1</PackageVersion>
+	<PackageVersion>6.0.0</PackageVersion>
 	<PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
 	<PackageProjectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</RepositoryUrl>
@@ -84,7 +84,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SoundFingerprinting" Version="5.2.3" />
+    <PackageReference Include="SoundFingerprinting" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bass.Net">
