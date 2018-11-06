@@ -274,9 +274,8 @@ namespace SoundFingerprinting.Audio.Bass
                     throw new BassException("Executing path of the application is null or empty. Could not find folders with native DLL libraries.");
                 }
 
-                UriBuilder uri = new UriBuilder(executingPath);
-                string path = Uri.UnescapeDataString(uri.Path);
-                return Path.Combine(path, Utils.Is64Bit ? "x64" : "x86");
+                Uri uri = new Uri(executingPath);
+                return Path.Combine(uri.LocalPath, Utils.Is64Bit ? "x64" : "x86");
             }
 
             private void LoadBassLibraries(string targetPath)

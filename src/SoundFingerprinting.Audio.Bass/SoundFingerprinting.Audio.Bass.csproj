@@ -15,7 +15,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="x64\bass.dll">
-	  <CopyToOutputDirectory>true</CopyToOutputDirectory>
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\x64</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
@@ -27,49 +27,49 @@
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x64\bassmix.dll">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\x64</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x64\tags.dll">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\x64</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x86\bass.dll">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\x86</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x86\bassflac.dll">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\x86</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x86\bassmix.dll">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\x86</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x86\tags.dll">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\x86</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
 	<Content Include="osx\libbassmix.dylib">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\osx</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
 	<Content Include="osx\libbass.dylib">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
 	  <PackagePath>content\osx</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
