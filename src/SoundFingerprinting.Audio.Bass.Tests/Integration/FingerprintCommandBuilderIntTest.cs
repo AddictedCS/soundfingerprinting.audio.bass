@@ -11,6 +11,8 @@
 
     using NUnit.Framework;
 
+    using SoundFingerprinting.Data;
+
     using Tests;
 
     [TestFixture]
@@ -28,8 +30,7 @@
             const int SecondsToProcess = 10;
             const int StartAtSecond = 30;
             var tags = tagService.GetTagInfo(PathToMp3);
-            var track = new TrackData(tags);
-            var trackReference = modelService.InsertTrack(track);
+            var track = new TrackInfo(Guid.NewGuid().ToString(), tags.Title, tags.Artist, tags.Duration);
 
             var hashDatas = fingerprintCommandBuilder
                                             .BuildFingerprintCommand()
@@ -38,7 +39,7 @@
                                             .Hash()
                                             .Result;
 
-            modelService.InsertHashDataForTrack(hashDatas, trackReference);
+            var trackReference = modelService.Insert(track, hashDatas);
 
             var queryResult = queryCommandBuilder.BuildQueryCommand()
                                .From(PathToMp3, SecondsToProcess, StartAtSecond)
