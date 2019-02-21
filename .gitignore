@@ -20,3 +20,4 @@ packages*/
 !NuGet.exe
 build/
 .vs/
+.idea/
