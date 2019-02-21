@@ -202,7 +202,7 @@ namespace SoundFingerprinting.Audio.Bass
                 {
                     RegisterBassKey();
 
-                    if (Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix)
+                    if (Environment.OSVersion.Platform != PlatformID.MacOSX)
                     {
                         string targetPath = GetTargetPathToLoadLibrariesFrom();
                         LoadBassLibraries(targetPath);
