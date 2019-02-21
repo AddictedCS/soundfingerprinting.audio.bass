@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45</TargetFrameworks>
+    <TargetFrameworks>net461</TargetFrameworks>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
@@ -21,5 +21,6 @@
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy &quot;$(ProjectDir)TestEnvironment&quot; &quot;$(TargetDir)&quot; /e /y" Condition="'$(OS)' != 'Unix'" />
 	<Exec Command="cp -R $(ProjectDir)TestEnvironment/* $(TargetDir)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="cp -R $(TargetDir)osx/* $(TargetDir)" Condition="'$(OS)' != 'Windows_NT'" />
   </Target>
 </Project>
