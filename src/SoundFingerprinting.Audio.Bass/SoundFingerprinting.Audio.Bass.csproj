@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461;</TargetFrameworks>
+    <TargetFrameworks>net461</TargetFrameworks>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<Authors>Sergiu Ciumac</Authors>
 	<PackageVersion>6.1.1</PackageVersion>
@@ -20,6 +20,12 @@
 	  <PackagePath>content\x64</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
+    <Content Include="x64\libbass.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>content\x64</PackagePath>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
     <Content Include="x64\bassflac.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
@@ -31,6 +37,12 @@
 	  <Pack>true</Pack>
 	  <PackagePath>content\x64</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
+    <Content Include="x64\libbassmix.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>content\x64</PackagePath>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x64\tags.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -44,6 +56,12 @@
 	  <PackagePath>content\x86</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
+    <Content Include="x86\libbass.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>content\x86</PackagePath>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
     <Content Include="x86\bassflac.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  <Pack>true</Pack>
@@ -55,6 +73,12 @@
 	  <Pack>true</Pack>
 	  <PackagePath>content\x86</PackagePath>
 	  <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
+    <Content Include="x86\libbassmix.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>content\x86</PackagePath>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x86\tags.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -76,11 +100,11 @@
     </Content>
 	<Content Include="..\Externals\Bass.Net.dll">
       <Pack>true</Pack>
-	  <PackagePath>lib\net45;lib\net46;lib\net461;lib\net47</PackagePath>
+	  <PackagePath>lib\net461</PackagePath>
     </Content>
 	<Content Include="..\Scripts\BassPackage\install.ps1">
       <Pack>true</Pack>
-	  <PackagePath>tools\net45;tools\net46;tools\net461;tools\net47</PackagePath>
+	  <PackagePath>tools\net461</PackagePath>
     </Content>
   </ItemGroup>
   <ItemGroup>
