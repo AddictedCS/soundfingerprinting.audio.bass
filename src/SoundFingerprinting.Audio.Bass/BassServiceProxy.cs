@@ -202,8 +202,11 @@ namespace SoundFingerprinting.Audio.Bass
                 {
                     RegisterBassKey();
 
-                    if (Environment.OSVersion.Platform != PlatformID.MacOSX)
+                    if (Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix)
                     {
+                        // MacOS and Unix libraries do not have entry points
+                        // for methods that load the native libraries from specific location
+                        // thus for this platforms loading is ignored.
                         string targetPath = GetTargetPathToLoadLibrariesFrom();
                         LoadBassLibraries(targetPath);
                         CheckIfFlacPluginIsLoaded(targetPath);
