@@ -1,8 +1,11 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.Tests
 {
+    using System.Collections.Generic;
     using System.IO;
-
+    using System.Linq;
     using NUnit.Framework;
+    using SoundFingerprinting.Data;
+    using SoundFingerprinting.DAO;
 
     public abstract class AbstractTest
     {
@@ -23,5 +26,26 @@
         protected const int SamplesToRead = 128 * 64;
 
         protected const int MinYear = 1501;
+        
+        protected void AssertHashDatasAreTheSame(IList<HashedFingerprint> firstHashDatas, IList<HashedFingerprint> secondHashDatas)
+        {
+            Assert.AreEqual(firstHashDatas.Count, secondHashDatas.Count);
+
+            // hashes are not ordered as parallel computation is involved
+            firstHashDatas = SortHashesByFirstValueOfHashBin(firstHashDatas);
+            secondHashDatas = SortHashesByFirstValueOfHashBin(secondHashDatas);
+
+            for (int i = 0; i < firstHashDatas.Count; i++)
+            {
+                CollectionAssert.AreEqual(firstHashDatas[i].HashBins, secondHashDatas[i].HashBins);
+                Assert.AreEqual(firstHashDatas[i].SequenceNumber, secondHashDatas[i].SequenceNumber);
+                Assert.AreEqual(firstHashDatas[i].StartsAt, secondHashDatas[i].StartsAt, Epsilon);
+            }
+        }
+
+        private List<HashedFingerprint> SortHashesByFirstValueOfHashBin(IEnumerable<HashedFingerprint> hashDatasFromFile)
+        {
+            return hashDatasFromFile.OrderBy(hashData => hashData.SequenceNumber).ToList();
+        }
     }
 }

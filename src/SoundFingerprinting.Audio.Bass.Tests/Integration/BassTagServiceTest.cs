@@ -6,7 +6,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class BassTagServiceTest : AbstractIntegrationTest
+    public class BassTagServiceTest : AbstractTest
     {
         private readonly ITagService tagService = new BassTagService();
 

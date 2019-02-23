@@ -7,7 +7,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class BassAudioServiceTest : AbstractIntegrationTest
+    public class BassAudioServiceTest : AbstractTest
     {
         private readonly BassAudioService bassAudioService;
         private readonly BassWaveFileUtility bassWaveFileUtility;
