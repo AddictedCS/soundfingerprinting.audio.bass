@@ -3,14 +3,14 @@
     <TargetFrameworks>net461</TargetFrameworks>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<Authors>Sergiu Ciumac</Authors>
-	<PackageVersion>6.1.1</PackageVersion>
+	<PackageVersion>6.2.0</PackageVersion>
 	<PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
 	<PackageProjectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<PackageDescription>Un4seen.Bass extension library for SoundFingerprinting framework. SoundFingerprinting default library is designed to read only raw wave files. This extension provides the ability to read all files supported by Bass (including .mp3, .flac, .ogg). Un4seen.Bass is free for non-comercial use. If you intend to use this extension for commercial purposes, please contact http://www.un4seen.com for licensing</PackageDescription>
 	<PackageTags>Audio Identification Fingerprinting Digital Signal Processing Music Recognition Data Mining Content Sound Shazam</PackageTags>
-	<PackageReleaseNotes>Version 5.2.3.1 contains OSx libraries for Un4Seen.Bass in order to be able to create BassAudioService on classes that are running on Mono on OSX platform.</PackageReleaseNotes>
+	<PackageReleaseNotes>Version 6.1.1 can be used with Mono on Unix environment. Version 5.2.3.1 contains OSx libraries for Un4Seen.Bass in order to be able to create BassAudioService on classes that are running on Mono on OSX platform.</PackageReleaseNotes>
     <IncludeContentInPack>true</IncludeContentInPack>
   </PropertyGroup>
   <ItemGroup>
@@ -108,7 +108,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SoundFingerprinting" Version="6.1.1" />
+    <PackageReference Include="SoundFingerprinting" Version="6.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bass.Net">
