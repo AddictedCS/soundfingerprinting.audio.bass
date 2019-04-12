@@ -2,18 +2,15 @@ namespace SoundFingerprinting.Audio.Bass
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
-    using System.Web;
-    using System.Web.Configuration;
-
     using Un4seen.Bass;
     using Un4seen.Bass.AddOn.Mix;
     using Un4seen.Bass.AddOn.Tags;
+    using SoundFingerprinting.Audio.Bass.Config;
 
     internal class BassServiceProxy : IBassServiceProxy
     {
@@ -259,13 +256,10 @@ namespace SoundFingerprinting.Audio.Bass
 
             private void RegisterBassKey()
             {
-                var config = GetConfiguration();
-
-                var bassConfigurationSection = config.GetSection("BassConfigurationSection") as BassConfigurationSection;
-
-                if (bassConfigurationSection != null)
+                var config = BassConfigReader.GetBassConfig();
+                if (config != null)
                 {
-                    proxy.RegisterBass(bassConfigurationSection.Email, bassConfigurationSection.RegistrationKey); // Call to avoid the freeware splash screen
+                    proxy.RegisterBass(config.Email, config.RegistrationKey); // Call to avoid the freeware splash screen
                 }
             }
 
@@ -339,16 +333,6 @@ namespace SoundFingerprinting.Audio.Bass
                 {
                     Trace.WriteLine("No default recording device could be found on running machine. Recording is not supported: " + proxy.GetLastError(), "Warning");
                 }
-            }
-
-            private Configuration GetConfiguration()
-            {
-                if (HttpContext.Current != null)
-                {
-                    return WebConfigurationManager.OpenWebConfiguration("~");
-                }
-
-                return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             }
         }
     }
