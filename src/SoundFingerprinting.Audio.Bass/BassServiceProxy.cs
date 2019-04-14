@@ -1,13 +1,10 @@
 namespace SoundFingerprinting.Audio.Bass
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading;
-    using Un4seen.Bass;
-    using Un4seen.Bass.AddOn.Mix;
-    using Un4seen.Bass.AddOn.Tags;
-    using SoundFingerprinting.Audio.Bass.Config;
+    using ManagedBass;
+    using ManagedBass.Mix;
 
     internal class BassServiceProxy : IBassServiceProxy
     {
@@ -27,110 +24,90 @@ namespace SoundFingerprinting.Audio.Bass
 
         public static BassServiceProxy Instance { get; } = new BassServiceProxy();
 
-        public void RegisterBass(string email, string registrationKey)
-        {
-            BassNet.Registration(email, registrationKey);
-        }
-
         public int GetVersion()
         {
-            return Bass.BASS_GetVersion();
+            return Bass.Version.Major; 
         }
 
-        public int GetMixerVersion()
+        public bool Init(int deviceNumber, int sampleRate, DeviceInitFlags flags)
         {
-            return BassMix.BASS_Mixer_GetVersion();
+            return Bass.Init(deviceNumber, sampleRate, flags, IntPtr.Zero);
         }
 
-        public IDictionary<int, string> PluginLoadDirectory(string path)
+        public bool SetConfig(Configuration config, bool value)
         {
-            return Bass.BASS_PluginLoadDirectory(path);
-        }
-
-        public bool Init(int deviceNumber, int sampleRate, BASSInit flags)
-        {
-            return Bass.BASS_Init(deviceNumber, sampleRate, flags, IntPtr.Zero);
-        }
-
-        public bool SetConfig(BASSConfig config, int value)
-        {
-            return Bass.BASS_SetConfig(config, value);
-        }
-
-        public bool SetConfig(BASSConfig config, bool value)
-        {
-            return Bass.BASS_SetConfig(config, value);
+            return Bass.Configure(config, value);
         }
 
         public bool RecordInit(int deviceNumber)
         {
-            return Bass.BASS_RecordInit(deviceNumber);
+            return Bass.RecordInit(deviceNumber);
         }
 
         public string GetLastError()
         {
-            return Bass.BASS_ErrorGetCode().ToString();
+            return Bass.LastError.ToString();
         }
 
         public int GetRecordingDevice()
         {
-            return Bass.BASS_RecordGetDevice();
+            return Bass.RecordingInfo.Inputs;
         }
 
-        public int CreateStream(string pathToAudioFile, BASSFlag flags)
+        public int CreateStream(string pathToAudioFile, BassFlags flags)
         {
-            return Bass.BASS_StreamCreateFile(pathToAudioFile, 0, 0, flags);
+            return Bass.CreateStream(pathToAudioFile, 0, 0, flags);
         }
 
-        public int CreateStreamFromUrl(string urlToResource, BASSFlag flags)
+        public int CreateStreamFromUrl(string urlToResource, BassFlags flags)
         {
-            return Bass.BASS_StreamCreateURL(urlToResource, 0, flags, null, IntPtr.Zero);
+            return Bass.CreateStream(urlToResource, 0, flags, null, IntPtr.Zero);
         }
 
-        public int StartRecording(int sampleRate, int numberOfChannels, BASSFlag flags)
+        public int StartRecording(int sampleRate, int numberOfChannels, BassFlags flags)
         {
-            return Bass.BASS_RecordStart(sampleRate, numberOfChannels, flags, null, IntPtr.Zero);
+            return Bass.RecordStart(sampleRate, numberOfChannels, flags, null, IntPtr.Zero);
         }
 
         public bool StartPlaying(int stream)
         {
-            return Bass.BASS_ChannelPlay(stream, false);
+            return Bass.ChannelPlay(stream);
         }
 
-        public int CreateMixerStream(int sampleRate, int channels, BASSFlag flags)
+        public int CreateMixerStream(int sampleRate, int channels, BassFlags flags)
         {
-            return BassMix.BASS_Mixer_StreamCreate(sampleRate, channels, flags);
+            return BassMix.CreateMixerStream(sampleRate, channels, flags);
         }
 
-        public bool CombineMixerStreams(int mixerStream, int stream, BASSFlag flags)
+        public bool CombineMixerStreams(int mixerStream, int stream, BassFlags flags)
         {
-            return BassMix.BASS_Mixer_StreamAddChannel(mixerStream, stream, flags);
+            return BassMix.MixerAddChannel(mixerStream, stream, flags);
         }
 
         public bool ChannelSetPosition(int stream, double seekToSecond)
         {
-            return Bass.BASS_ChannelSetPosition(stream, seekToSecond);
+            return Bass.ChannelSetPosition(stream, Bass.ChannelSeconds2Bytes(stream, seekToSecond));
         }
 
-        public bool ChannelSetAttribute(int stream, BASSAttribute attribute, float value)
+        public bool ChannelSetAttribute(int stream, ChannelAttribute attribute, float value)
         {
-            return Bass.BASS_ChannelSetAttribute(stream, attribute, value);
+            return Bass.ChannelSetAttribute(stream, attribute, value);
         }
 
         public int ChannelGetData(int stream, float[] buffer, int lengthInBytes)
         {
-            return Bass.BASS_ChannelGetData(stream, buffer, lengthInBytes);
+            return Bass.ChannelGetData(stream, buffer, lengthInBytes);
         }
 
         public double ChannelGetLengthInSeconds(int stream)
         {
-            long bytes = Bass.BASS_ChannelGetLength(stream, BASSMode.BASS_POS_BYTES);
-            return Bass.BASS_ChannelBytes2Seconds(stream, bytes);
+            long bytes = Bass.ChannelGetLength(stream);
+            return Bass.ChannelBytes2Seconds(stream, bytes);
         }
 
         public bool FreeStream(int stream)
         {
-            if (!Bass.BASS_StreamFree(stream))
+            if (!Bass.StreamFree(stream))
             {
                 Trace.WriteLine("Could not release stream " + stream + ". Possible memory leak! Bass Error: " + GetLastError(), "Error");
                 return false;
@@ -141,17 +118,12 @@ namespace SoundFingerprinting.Audio.Bass
 
         public bool PluginFree(int number)
         {
-            return Bass.BASS_PluginFree(number);
+            return Bass.PluginFree(number);
         }
 
         public bool BassFree()
         {
-            return Bass.BASS_Free();
-        }
-
-        public TAG_INFO GetTagsFromFile(string pathToFile)
-        {
-            return BassTags.BASS_TAG_GetFromFile(pathToFile);
+            return Bass.Free();
         }
 
         public void Dispose()
@@ -184,11 +156,6 @@ namespace SoundFingerprinting.Audio.Bass
                 this.proxy = proxy;
                 if (IsBassLibraryHasToBeInitialized(Interlocked.Increment(ref initializedInstances)))
                 {
-                    RegisterBassKey();
-                    
-                    // force loading the libs
-                    proxy.GetVersion();
-                    
                     InitializeBassLibraryWithAudioDevices();
                     SetDefaultConfigs();
                     InitializeRecordingDevice();
@@ -229,21 +196,12 @@ namespace SoundFingerprinting.Audio.Bass
                 return numberOfInstances == 1;
             }
 
-            private void RegisterBassKey()
-            {
-                var config = BassConfigReader.GetBassConfig();
-                if (config != null)
-                {
-                    proxy.RegisterBass(config.Email, config.RegistrationKey); // Call to avoid the freeware splash screen
-                }
-            }
-
             private void InitializeBassLibraryWithAudioDevices()
             {
-                if (!proxy.Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT | BASSInit.BASS_DEVICE_MONO))
+                if (!proxy.Init(-1, 44100, DeviceInitFlags.Default | DeviceInitFlags.Mono))
                 {
                     Trace.WriteLine("Failed to find a sound device on running machine. Playing audio files will not be supported. " + proxy.GetLastError(), "Warning");
-                    if (!proxy.Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT | BASSInit.BASS_DEVICE_MONO))
+                    if (!proxy.Init(0, 44100, DeviceInitFlags.Default | DeviceInitFlags.Mono))
                     {
                         throw new BassException(proxy.GetLastError());
                     }
@@ -252,7 +210,7 @@ namespace SoundFingerprinting.Audio.Bass
 
             private void SetDefaultConfigs()
             {
-                if (!proxy.SetConfig(BASSConfig.BASS_CONFIG_FLOATDSP, true))
+                if (!proxy.SetConfig(Configuration.FloatDSP, true))
                 {
                     throw new BassException(proxy.GetLastError());
                 }

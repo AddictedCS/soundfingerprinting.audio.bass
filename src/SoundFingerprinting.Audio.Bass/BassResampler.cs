@@ -1,8 +1,7 @@
 ﻿namespace SoundFingerprinting.Audio.Bass
 {
     using System;
-
-    using Un4seen.Bass;
+    using ManagedBass;
 
     internal class BassResampler : IBassResampler
     {
@@ -33,7 +32,7 @@
                 SeekToSecondInCaseIfRequired(sourceStream, startAt);
 
                 mixerStream = streamFactory.CreateMixerStream(sampleRate);
-                proxy.ChannelSetAttribute(sourceStream, BASSAttribute.BASS_ATTRIB_SRC, resampleQuality);
+                proxy.ChannelSetAttribute(sourceStream, ChannelAttribute.SampleRateConversion, resampleQuality);
                 CombineStreams(mixerStream, sourceStream);
                 return samplesAggregator.ReadSamplesFromSource(getSamplesProvider(mixerStream), seconds, sampleRate);
             }
@@ -57,7 +56,7 @@
 
         private void CombineStreams(int mixerStream, int stream)
         {
-            if (!proxy.CombineMixerStreams(mixerStream, stream, BASSFlag.BASS_SAMPLE_FLOAT))
+            if (!proxy.CombineMixerStreams(mixerStream, stream, BassFlags.Float))
             {
                 throw new BassException(proxy.GetLastError());
             }

@@ -1,26 +1,15 @@
 ﻿namespace SoundFingerprinting.Audio.Bass
 {
     using System;
-    using System.Collections.Generic;
-
-    using Un4seen.Bass;
-    using Un4seen.Bass.AddOn.Tags;
+    using ManagedBass;
 
     internal interface IBassServiceProxy : IDisposable
     {
-        void RegisterBass(string email, string registrationKey);
-
         int GetVersion();
 
-        int GetMixerVersion();
+        bool Init(int deviceNumber, int sampleRate, DeviceInitFlags flags);
 
-        IDictionary<int, string> PluginLoadDirectory(string path);
-
-        bool Init(int deviceNumber, int sampleRate, BASSInit flags);
-
-        bool SetConfig(BASSConfig config, int value);
-
-        bool SetConfig(BASSConfig config, bool value);
+        bool SetConfig(Configuration config, bool value);
 
         bool RecordInit(int deviceNumber);
 
@@ -28,21 +17,21 @@
 
         int GetRecordingDevice();
 
-        int CreateStream(string pathToAudioFile, BASSFlag flags);
+        int CreateStream(string pathToAudioFile, BassFlags flags);
 
-        int CreateStreamFromUrl(string urlToResource, BASSFlag flags);
+        int CreateStreamFromUrl(string urlToResource, BassFlags flags);
 
-        int StartRecording(int sampleRate, int numberOfChannels, BASSFlag flags);
+        int StartRecording(int sampleRate, int numberOfChannels, BassFlags flags);
 
         bool StartPlaying(int stream);
 
-        int CreateMixerStream(int sampleRate, int channels, BASSFlag flags);
+        int CreateMixerStream(int sampleRate, int channels, BassFlags flags);
 
-        bool CombineMixerStreams(int mixerStream, int stream, BASSFlag flags);
+        bool CombineMixerStreams(int mixerStream, int stream, BassFlags flags);
 
         bool ChannelSetPosition(int stream, double seekToSecond);
 
-        bool ChannelSetAttribute(int stream, BASSAttribute attribute, float value);
+        bool ChannelSetAttribute(int stream, ChannelAttribute attribute, float value);
 
         int ChannelGetData(int stream, float[] buffer, int lengthInBytes);
 
@@ -53,7 +42,5 @@
         bool PluginFree(int number);
 
         bool BassFree();
-
-        TAG_INFO GetTagsFromFile(string pathToFile);
     }
 }

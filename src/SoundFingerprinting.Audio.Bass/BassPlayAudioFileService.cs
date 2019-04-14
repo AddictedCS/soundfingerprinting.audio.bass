@@ -1,13 +1,12 @@
 ﻿namespace SoundFingerprinting.Audio.Bass
 {
-    using Un4seen.Bass;
+    using ManagedBass;
 
     public class BassPlayAudioFileService : IPlayAudioFileService
     {
         private readonly IBassServiceProxy proxy;
 
-        public BassPlayAudioFileService()
-            : this(BassServiceProxy.Instance)
+        public BassPlayAudioFileService(): this(BassServiceProxy.Instance)
         {
         }
 
@@ -18,7 +17,7 @@
 
         public object PlayFile(string pathToFile)
         {
-            int stream = proxy.CreateStream(pathToFile, BASSFlag.BASS_DEFAULT);
+            int stream = proxy.CreateStream(pathToFile, BassFlags.Default);
 
             if (stream == 0)
             {

@@ -1,6 +1,6 @@
 ﻿namespace SoundFingerprinting.Audio.Bass
 {
-    using Un4seen.Bass;
+    using ManagedBass;
 
     internal class BassStreamFactory : IBassStreamFactory
     {
@@ -34,14 +34,14 @@
 
         public int CreateStreamFromMicrophone(int sampleRate)
         {
-            int stream = proxy.StartRecording(sampleRate, BassConstants.NumberOfChannels, BASSFlag.BASS_SAMPLE_MONO | BASSFlag.BASS_SAMPLE_FLOAT);
+            int stream = proxy.StartRecording(sampleRate, BassConstants.NumberOfChannels, BassFlags.Mono | BassFlags.Float);
             ThrowIfStreamIsInvalid(stream);
             return stream;
         }
 
-        private BASSFlag GetDefaultFlags()
+        private BassFlags GetDefaultFlags()
         {
-            return BASSFlag.BASS_STREAM_DECODE | BASSFlag.BASS_SAMPLE_MONO | BASSFlag.BASS_SAMPLE_FLOAT;
+            return BassFlags.Decode | BassFlags.Mono | BassFlags.Float;
         }
 
         private bool IsStreamValid(int stream)

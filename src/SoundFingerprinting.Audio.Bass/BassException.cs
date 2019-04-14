@@ -4,8 +4,7 @@
 
     public class BassException : Exception
     {
-        public BassException(string errorMessage)
-            : base(errorMessage)
+        public BassException(string errorMessage): base(errorMessage)
         {
         }
     }

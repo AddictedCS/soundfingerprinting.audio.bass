@@ -18,7 +18,6 @@
     public class FingerprintCommandBuilderIntTest : AbstractTest
     {
         private readonly IAudioService audioService = new BassAudioService(6);
-        private readonly ITagService tagService = new BassTagService();
 
         [Test]
         public async Task CreateFingerprintsFromFileAndAssertNumberOfFingerprints()
@@ -65,8 +64,7 @@
             const int StartAtSecond = 30;
 
             var modelService = new InMemoryModelService();
-            var tags = tagService.GetTagInfo(PathToMp3);
-            var track = new TrackInfo(Guid.NewGuid().ToString(), tags.Title, tags.Artist, tags.Duration);
+            var track = new TrackInfo(Guid.NewGuid().ToString(), "title", "artist", audioService.GetLengthInSeconds(PathToMp3));
 
             var hashDatas = await FingerprintCommandBuilder.Instance
                 .BuildFingerprintCommand()

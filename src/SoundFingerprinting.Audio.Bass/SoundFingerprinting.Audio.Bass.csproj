@@ -3,14 +3,14 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>Sergiu Ciumac</Authors>
-    <PackageVersion>6.2.1</PackageVersion>
+    <PackageVersion>6.2.1.2</PackageVersion>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageDescription>Un4seen.Bass extension library for SoundFingerprinting framework. SoundFingerprinting default library is designed to read only raw wave files. This extension provides the ability to read all files supported by Bass (including .mp3, .flac, .ogg). Un4seen.Bass is free for non-comercial use. If you intend to use this extension for commercial purposes, please contact http://www.un4seen.com for licensing</PackageDescription>
     <PackageTags>Audio Identification Fingerprinting Digital Signal Processing Music Recognition Data Mining Content Sound Shazam</PackageTags>
-    <PackageReleaseNotes>Version 6.1.1 can be used with Mono on Unix environment. Version 5.2.3.1 contains OSx libraries for Un4Seen.Bass in order to be able to create BassAudioService on classes that are running on Mono on OSX platform.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 6.2.1 can be used in dotnet core or with Mono environment on Unix and MacOSx. Version 6.1.1 can be used with Mono on Unix environment. Version 5.2.3.1 contains OSx libraries for Un4Seen.Bass in order to be able to create BassAudioService on classes that are running on Mono on OSX platform.</PackageReleaseNotes>
     <IncludeContentInPack>true</IncludeContentInPack>
   </PropertyGroup>
   <ItemGroup>
@@ -39,12 +39,6 @@
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="x64\libbassmix.so">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <Pack>true</Pack>
-      <PackagePath>content\x64</PackagePath>
-      <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
-    <Content Include="x64\tags.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
       <PackagePath>content\x64</PackagePath>
@@ -80,12 +74,6 @@
       <PackagePath>content\x86</PackagePath>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
-    <Content Include="x86\tags.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <Pack>true</Pack>
-      <PackagePath>content\x86</PackagePath>
-      <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
     <Content Include="osx\libbassmix.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Pack>true</Pack>
@@ -98,22 +86,19 @@
       <PackagePath>content\osx</PackagePath>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
-	<Content Include="..\Externals\Bass.Net.Linux.dll">
-      <Pack>true</Pack>
-      <PackagePath>lib\net461</PackagePath>
-    </Content>
     <Content Include="..\Scripts\BassPackage\install.ps1">
       <Pack>true</Pack>
-      <PackagePath>tools\netstandard2.0</PackagePath>
+      <PackagePath>tools\netcoreapp2.0</PackagePath>
     </Content>
+      <Content Include="..\Scripts\BassPackage\install.ps1">
+          <Pack>true</Pack>
+          <PackagePath>tools\net461</PackagePath>
+      </Content>
   </ItemGroup>
   <ItemGroup>
+      <PackageReference Include="ManagedBass" Version="2.0.4" />
+      <PackageReference Include="ManagedBass.Mix" Version="2.1.0" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
       <PackageReference Include="SoundFingerprinting" Version="6.2.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Bass.Net.Linux, Version=2.4.14.0, Culture=neutral, PublicKeyToken=b7566c273e6ef480">
-      <HintPath>..\Externals\Bass.Net.Linux.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

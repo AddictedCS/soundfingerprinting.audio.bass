@@ -1,15 +1,14 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.Tests.Unit
 {
     using System.Collections.Generic;
-
+    using ManagedBass;
     using Moq;
 
     using NUnit.Framework;
 
     using SoundFingerprinting.Audio;
     using SoundFingerprinting.Audio.Bass;
-
-    using Un4seen.Bass;
+    using BassException = SoundFingerprinting.Audio.Bass.BassException;
 
     [TestFixture]
     public class BassResamplerTest : AbstractTest
@@ -49,10 +48,10 @@
             float[] samplesToReturn = new float[1024];
 
             streamFactory.Setup(f => f.CreateMixerStream(SampleRate)).Returns(MixerStream);
-            proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BASSFlag.BASS_SAMPLE_FLOAT)).Returns(true);
+            proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BassFlags.Float)).Returns(true);
             proxy.Setup(p => p.FreeStream(SourceStream)).Returns(true);
             proxy.Setup(p => p.FreeStream(MixerStream)).Returns(true);
-            proxy.Setup(p => p.ChannelSetAttribute(SourceStream, BASSAttribute.BASS_ATTRIB_SRC, ResamplerQuality)).Returns(true);
+            proxy.Setup(p => p.ChannelSetAttribute(SourceStream, ChannelAttribute.SampleRateConversion, ResamplerQuality)).Returns(true);
             samplesAggregator.Setup(s => s.ReadSamplesFromSource(It.IsAny<ISamplesProvider>(), Seconds, SampleRate))
                 .Returns(samplesToReturn);
             var queue = new Queue<float[]>(new[] { samplesToReturn });
@@ -73,9 +72,9 @@
             streamFactory.Setup(f => f.CreateMixerStream(SampleRate)).Returns(MixerStream);
             proxy.Setup(p => p.FreeStream(SourceStream)).Returns(true);
             proxy.Setup(p => p.FreeStream(MixerStream)).Returns(true);
-            proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BASSFlag.BASS_SAMPLE_FLOAT)).Returns(false);
+            proxy.Setup(p => p.CombineMixerStreams(MixerStream, SourceStream, BassFlags.Float)).Returns(false);
             proxy.Setup(p => p.GetLastError()).Returns("Combining streams failed");
-            proxy.Setup(p => p.ChannelSetAttribute(SourceStream, BASSAttribute.BASS_ATTRIB_SRC, ResamplerQuality)).Returns(true);
+            proxy.Setup(p => p.ChannelSetAttribute(SourceStream, ChannelAttribute.SampleRateConversion, ResamplerQuality)).Returns(true);
 
             var queue = new Queue<float[]>(new[] { new float[0] });
 
