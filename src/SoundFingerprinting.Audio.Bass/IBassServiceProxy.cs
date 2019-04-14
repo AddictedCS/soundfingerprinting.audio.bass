@@ -10,10 +10,6 @@
     {
         void RegisterBass(string email, string registrationKey);
 
-        bool BassLoadMe(string targetPath);
-
-        bool BassMixLoadMe(string targetPath);
-
         int GetVersion();
 
         int GetMixerVersion();

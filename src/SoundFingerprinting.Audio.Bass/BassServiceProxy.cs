@@ -3,9 +3,6 @@ namespace SoundFingerprinting.Audio.Bass
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
     using System.Threading;
     using Un4seen.Bass;
     using Un4seen.Bass.AddOn.Mix;
@@ -33,16 +30,6 @@ namespace SoundFingerprinting.Audio.Bass
         public void RegisterBass(string email, string registrationKey)
         {
             BassNet.Registration(email, registrationKey);
-        }
-
-        public bool BassLoadMe(string targetPath)
-        {
-            return Bass.LoadMe(targetPath);
-        }
-
-        public bool BassMixLoadMe(string targetPath)
-        {
-            return BassMix.LoadMe(targetPath);
         }
 
         public int GetVersion()
@@ -198,22 +185,10 @@ namespace SoundFingerprinting.Audio.Bass
                 if (IsBassLibraryHasToBeInitialized(Interlocked.Increment(ref initializedInstances)))
                 {
                     RegisterBassKey();
-
-                    if (Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix)
-                    {
-                        // MacOS and Unix libraries do not have entry points
-                        // for methods that load the native libraries from specific location
-                        // thus for this platforms loading is ignored.
-                        string targetPath = GetTargetPathToLoadLibrariesFrom();
-                        LoadBassLibraries(targetPath);
-                        CheckIfFlacPluginIsLoaded(targetPath);
-                    }
-                    else
-                    {
-                        // force loading the libs
-                        proxy.GetVersion();
-                    }
-
+                    
+                    // force loading the libs
+                    proxy.GetVersion();
+                    
                     InitializeBassLibraryWithAudioDevices();
                     SetDefaultConfigs();
                     InitializeRecordingDevice();
@@ -263,40 +238,6 @@ namespace SoundFingerprinting.Audio.Bass
                 }
             }
 
-            private string GetTargetPathToLoadLibrariesFrom()
-            {
-                string executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
-                if (string.IsNullOrEmpty(executingPath))
-                {
-                    throw new BassException("Executing path of the application is null or empty. Could not find folders with native DLL libraries.");
-                }
-
-                UriBuilder uri = new UriBuilder(executingPath);
-                string path = Uri.UnescapeDataString(uri.Path);
-                return Path.Combine(path, Utils.Is64Bit ? "x64" : "x86");
-            }
-
-            private void LoadBassLibraries(string targetPath)
-            {
-                if (!proxy.BassLoadMe(targetPath))
-                {
-                    throw new BassException("Could not load bass native libraries from the following path: " + targetPath);
-                }
-
-                if (!proxy.BassMixLoadMe(targetPath))
-                {
-                    throw new BassException("Could not load bassmix library from the following path: " + targetPath);
-                }
-
-                DummyCallToLoadBassLibraries();
-            }
-
-            private void DummyCallToLoadBassLibraries()
-            {
-                proxy.GetVersion();
-                proxy.GetMixerVersion();
-            }
-
             private void InitializeBassLibraryWithAudioDevices()
             {
                 if (!proxy.Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT | BASSInit.BASS_DEVICE_MONO))
@@ -306,15 +247,6 @@ namespace SoundFingerprinting.Audio.Bass
                     {
                         throw new BassException(proxy.GetLastError());
                     }
-                }
-            }
-
-            private void CheckIfFlacPluginIsLoaded(string targetPath)
-            {
-                var loadedPlugIns = proxy.PluginLoadDirectory(targetPath);
-                if (!loadedPlugIns.Any(p => p.Value.EndsWith(FlacDllName)))
-                {
-                    Trace.WriteLine("Could not load bassflac.dll. FLAC format is not supported!", "Warning");
                 }
             }
 

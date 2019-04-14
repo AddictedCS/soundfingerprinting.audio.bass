@@ -10,12 +10,10 @@
     public class BassAudioServiceTest : AbstractTest
     {
         private readonly BassAudioService bassAudioService;
-        private readonly BassWaveFileUtility bassWaveFileUtility;
 
         public BassAudioServiceTest()
         {
             bassAudioService = new BassAudioService();
-            bassWaveFileUtility = new BassWaveFileUtility();
         }
 
         [Test]
@@ -50,21 +48,6 @@
                 var audioSamples = bassAudioService.ReadMonoSamplesFromFile(PathToMp3, SampleRate, SecondsToRead, StartAtSecond);
                 Assert.AreEqual(subsetOfSamples.Length, audioSamples.Samples.Length);
             }
-        }
-
-        [Test]
-        public void ReadMonoFromFileTest()
-        {
-            string tempFile = string.Format(@"{0}{1}", Path.GetTempPath(), "0.wav");
-            var audioSamples = bassAudioService.ReadMonoSamplesFromFile(PathToMp3, SampleRate);
-
-            bassWaveFileUtility.WriteSamplesToFile(audioSamples.Samples, SampleRate, tempFile);
-            
-            FileInfo info = new FileInfo(tempFile);
-            long expectedSize = info.Length - WaveHeader;
-            long actualSize = audioSamples.Samples.Length * (BitsPerSample / 8);
-            Assert.AreEqual(expectedSize, actualSize);
-            File.Delete(tempFile);
         }
 
         private float[] GetSubsetOfSamplesFromFullSong(float[] samples, int secondsToRead, int startAtSecond)
