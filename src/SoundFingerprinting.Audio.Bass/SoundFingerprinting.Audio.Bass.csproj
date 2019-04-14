@@ -3,7 +3,7 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>Sergiu Ciumac</Authors>
-    <PackageVersion>6.2.0</PackageVersion>
+    <PackageVersion>6.2.1</PackageVersion>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</RepositoryUrl>
@@ -109,7 +109,7 @@
   </ItemGroup>
   <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
-      <PackageReference Include="SoundFingerprinting" Version="6.2.0" />
+      <PackageReference Include="SoundFingerprinting" Version="6.2.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bass.Net.Linux, Version=2.4.14.0, Culture=neutral, PublicKeyToken=b7566c273e6ef480">
