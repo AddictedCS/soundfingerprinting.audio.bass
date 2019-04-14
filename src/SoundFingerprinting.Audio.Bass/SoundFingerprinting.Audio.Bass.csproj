@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>Sergiu Ciumac</Authors>
     <PackageVersion>6.2.0</PackageVersion>
@@ -98,22 +98,22 @@
       <PackagePath>content\osx</PackagePath>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
-    <Content Include="..\Externals\Bass.Net.dll">
+    <Content Include="..\Externals\Bass.Linux.Net.dll">
       <Pack>true</Pack>
-      <PackagePath>lib\net461</PackagePath>
+      <PackagePath>lib\netstandard2.0</PackagePath>
     </Content>
     <Content Include="..\Scripts\BassPackage\install.ps1">
       <Pack>true</Pack>
-      <PackagePath>tools\net461</PackagePath>
+      <PackagePath>tools\netstandard2.0</PackagePath>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
-    <PackageReference Include="SoundFingerprinting" Version="6.2.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+      <PackageReference Include="SoundFingerprinting" Version="6.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Bass.Net">
-      <HintPath>..\Externals\Bass.Net.dll</HintPath>
+    <Reference Include="Bass.Net.Linux, Version=2.4.14.0, Culture=neutral, PublicKeyToken=b7566c273e6ef480">
+      <HintPath>..\Externals\Bass.Net.Linux.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
