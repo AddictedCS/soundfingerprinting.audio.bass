@@ -98,7 +98,7 @@
       <PackagePath>content\osx</PackagePath>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
-    <Content Include="..\Externals\Bass.Linux.Net.dll">
+    <Content Include="..\Externals\Bass.Net.Linux.dll">
       <Pack>true</Pack>
       <PackagePath>lib\netstandard2.0</PackagePath>
     </Content>
