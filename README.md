@@ -1,15 +1,12 @@
 #Bass.Net audio integration with SoundFingerprinting
 Bass module for Sound Fingerprinting framework. Comes as a better substitute for **NAudio** audio library in [soundfingerprinting](https://github.com/AddictedCS/soundfingerprinting) algorithm.
-It is a more advanced and reliable counterpart, though its not free. Please check their [homepage](http://www.un4seen.com) before using it. In case you have Bass registration key you can specify it in **SoundFingerprinting** framework by adding them in your application configuration file:
+It is a more advanced and reliable counterpart, though its not free. Please check their [homepage](http://www.un4seen.com) before using it. In case you have Bass registration key you can specify it in **SoundFingerprinting** framework by adding them in your appsettings.json file:
 
-```xml
-<configuration>
-  <configSections>
-    <section name="BassConfigurationSection" type="SoundFingerprinting.Audio.Bass.BassConfigurationSection, SoundFingerprinting.Audio.Bass" />
-  </configSections>
-
-  <BassConfigurationSection email = "email" registrationKey = "registration-key" />
-</configuration>
+```json
+{
+   "email": "license-email",
+   "registrationKey": "registration-key"
+}
 ```
 
 ### Binaries
