@@ -3,6 +3,7 @@ namespace SoundFingerprinting.Audio.Bass
     using System;
     using System.Diagnostics;
     using System.Threading;
+    using System.Linq;
     using ManagedBass;
     using ManagedBass.Mix;
 
@@ -143,7 +144,10 @@ namespace SoundFingerprinting.Audio.Bass
 
         private class BassLifetimeManager : IDisposable
         {
-            private const string FlacDllName = "bassflac.dll";
+            private static bool IsWindows =>
+                !new[] {PlatformID.MacOSX, PlatformID.Unix}.Contains(Environment.OSVersion.Platform);
+
+            private WindowsBassLoader windowsBassLoader = new WindowsBassLoader();
 
             private static int initializedInstances;
 
@@ -156,6 +160,15 @@ namespace SoundFingerprinting.Audio.Bass
                 this.proxy = proxy;
                 if (IsBassLibraryHasToBeInitialized(Interlocked.Increment(ref initializedInstances)))
                 {
+                    if (IsWindows)
+                    {
+                        // MacOS and Unix libraries do not have entry points
+                        // for methods that load the native libraries from specific location
+                        // thus for this platforms loading is ignored.
+                        windowsBassLoader.LoadBass();
+                        windowsBassLoader.LoadBassMix();
+                    }
+
                     InitializeBassLibraryWithAudioDevices();
                     SetDefaultConfigs();
                     InitializeRecordingDevice();
@@ -184,6 +197,12 @@ namespace SoundFingerprinting.Audio.Bass
                         if (!proxy.BassFree())
                         {
                             Trace.WriteLine("Could not free Bass library. Possible memory leak!", "Error");
+                        }
+
+                        if (IsWindows)
+                        {
+                            windowsBassLoader.FreeBassMix();
+                            windowsBassLoader.FreeBass();
                         }
                     }
                 }
