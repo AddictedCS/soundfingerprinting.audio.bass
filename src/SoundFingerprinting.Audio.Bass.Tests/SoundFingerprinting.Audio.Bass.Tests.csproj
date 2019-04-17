@@ -13,11 +13,9 @@
   <ItemGroup>
 	<ProjectReference Include="..\SoundFingerprinting.Audio.Bass\SoundFingerprinting.Audio.Bass.csproj" />
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)TestEnvironment&quot; &quot;$(TargetDir)&quot; /e /y" Condition="'$(OS)' != 'Unix'" />
-	  <Exec Command="cp -R $(ProjectDir)TestEnvironment/* $(TargetDir)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="cp -R $(TargetDir)osx/* $(TargetDir)" Condition="'$(OS)' != 'Windows_NT'" />
-    <Exec Command="cp -R $(TargetDir)x64/libbass* $(TargetDir)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="xcopy &quot;$(TargetDir)x64\bass*&quot; &quot;$(TargetDir)&quot; /y /s" Condition="'$(OS)' == 'Windows_NT'" />
+  <Target Name="PostBuild" BeforeTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(ProjectDir)TestEnvironment&quot; &quot;$(TargetDir)&quot; /e /y" Condition="$([MSBuild]::IsOsPlatform(Windows))" />
+    <Exec Command="cp -R $(ProjectDir)TestEnvironment/* $(TargetDir)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="cp -R $(TargetDir)osx/* $(TargetDir)" Condition="$([MSBuild]::IsOsPlatform(OSX))" />
   </Target>
 </Project>
