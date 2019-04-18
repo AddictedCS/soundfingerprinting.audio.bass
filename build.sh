@@ -7,6 +7,8 @@ else
 fi
 
 nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory build/testrunner
+
+msbuild src/SoundFingerprinting.Audio.Bass.sln /t:Restore
 msbuild src/SoundFingerprinting.Audio.Bass.sln /p:Configuration=Release
 
 dotnet test ./src/SoundFingerprinting.Audio.Bass.Tests/SoundFingerprinting.Audio.Bass.Tests.csproj -c Release -f netcoreapp2.0
