@@ -1,5 +1,6 @@
 language: csharp
 mono: latest
+dotnet: 2.1.300
 solution: src/SoundFingerprinting.Audio.Bass.sln
 install:
   - export BASS_HOME=$TRAVIS_BUILD_DIR/src/SoundFingerprinting.Audio.Bass/x64/
