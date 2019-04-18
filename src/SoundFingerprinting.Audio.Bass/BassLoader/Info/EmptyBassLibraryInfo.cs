@@ -1,6 +1,6 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.BassLoader.Info
 {
-    internal class MacOsBassLibraryInfo : IBassLibraryInfo
+    internal class EmptyBassLibraryInfo : IBassLibraryInfo
     {
         public string Path { get; }
         public string BassFileName { get; }

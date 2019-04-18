@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class MacOsLibraryLoader : ILibraryLoader
+    internal class NoOpLibraryLoader : ILibraryLoader
     {
         public IntPtr Load(string path)
         {
