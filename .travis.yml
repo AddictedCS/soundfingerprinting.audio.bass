@@ -2,9 +2,12 @@ language: csharp
 mono: latest
 solution: src/SoundFingerprinting.Audio.Bass.sln
 install:
+  - export BASS_HOME=$TRAVIS_BUILD_DIR/src/SoundFingerprinting.Audio.Bass/x64/
+  - export LD_LIBRARY_PATH=$BASS_HOME
   - nuget restore src/SoundFingerprinting.Audio.Bass.sln
   - nuget install NUnit.Runners -Version 3.5.0 -OutputDirectory build/testrunner
 script:
+  - dotnet test ./src/SoundFingerprinting.Audio.Bass.Tests/SoundFingerprinting.Audio.Bass.Tests.csproj -c Release -f netcoreapp2.0
   - msbuild /p:Configuration=Release src/SoundFingerprinting.Audio.Bass.sln
   - mono build/testrunner/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe src/SoundFingerprinting.Audio.Bass.Tests/bin/Release/net461/SoundFingerprinting.Audio.Bass.Tests.dll
 
