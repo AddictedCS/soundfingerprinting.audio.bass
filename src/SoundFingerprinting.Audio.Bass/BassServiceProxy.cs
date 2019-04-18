@@ -136,7 +136,7 @@ namespace SoundFingerprinting.Audio.Bass
 
         protected virtual void Dispose(bool isDisposing)
         {
-            if (!alreadyDisposed)
+            if (!alreadyDisposed && isDisposing)
             {
                 lifetimeManager.Dispose();
             }
