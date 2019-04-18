@@ -20,6 +20,7 @@
             var handle = IntPtr.Zero;
 
             Assert.DoesNotThrow(() => handle = loader.Load(path));
+            Assert.AreNotEqual(IntPtr.Zero, handle);
             loader.Free(handle);
         }
 
