@@ -2,8 +2,8 @@
 {
     internal class EmptyBassLibraryInfo : IBassLibraryInfo
     {
-        public string Path { get; }
-        public string BassFileName { get; }
-        public string BassMixFileName { get; }
+        public string Path => "";
+        public string BassFileName => "";
+        public string BassMixFileName => "";
     }
 }

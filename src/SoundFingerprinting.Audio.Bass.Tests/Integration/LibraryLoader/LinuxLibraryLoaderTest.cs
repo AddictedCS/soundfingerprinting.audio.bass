@@ -7,7 +7,7 @@
     using Bass.LibraryLoader;
 
     [TestFixture]
-    [Platform("Linux")]
+    [Platform("Linux", Exclude = "Mono")]
     public class LinuxLibraryLoaderTest
     {
         private readonly ILibraryLoader loader = new LinuxLibraryLoader();
