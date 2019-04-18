@@ -13,6 +13,10 @@ In order to build latest version of the **SoundFingerprinting.Audio.Bass** assem
     Install-Package SoundFingerprinting.Audio.Bass
 	
 ### .NET Core on Linux
+
+| HINT: Use `dotnet-sdk-2.1.202` instead of `dotnet-sdk-2.2` to avoid https://github.com/dotnet/core/issues/2540 |
+| --- |
+
 Add a `BASS_HOME` environment variable which points to the path where BASS *.so modules reside. Add the same path to `LD_LIBRARY_PATH`, e.g.:
 
     $ export BASS_HOME=/home/user/Projects/soundfingerprinting.audio.bass/src/SoundFingerprinting.Audio.Bass.Tests/bin/Release/netcoreapp2.0/x64
