@@ -8,6 +8,32 @@ It is a faster and more reliable counterpart that support a wide variaty of audi
 In order to build latest version of the **SoundFingerprinting.Audio.Bass** assembly run the following command from repository root
 
     .\build.cmd
+
+### Running on Linux (.NET Core and Mono)
+
+| HINT: Use `dotnet-sdk-2.1.202` instead of `dotnet-sdk-2.2` to avoid https://github.com/dotnet/core/issues/2540 |
+| --- |
+
+Install the BASS modules once into `/usr/lib/bass`. The following was tested on `Ubuntu 18.04.2 x64`:
+
+	$ cd soundfingerprinting.audio.bass/
+	$ sudo mkdir /usr/lib/bass
+	$ sudo cp src/SoundFingerprinting.Audio.Bass/x64/*.so /usr/lib/bass
+	$ sudo bash -c 'echo /usr/lib/bass >> /etc/ld.so.conf.d/bass.conf'
+	$ sudo ldconfig
+	$ ldconfig --print-cache | grep libbass
+		libbassmix.so (libc6,x86-64) => /usr/lib/bass/libbassmix.so
+		libbass.so (libc6,x86-64) => /usr/lib/bass/libbass.so
+	$ echo '
+	> # un4seen BASS library:
+	> export BASS_HOME=/usr/lib/bass' >> ~/.profile
+	# setting LD_LIBRARY_PATH in this case is not necessary
+	# BASS_HOME will be visible after next logout-login, but until then:
+	$ source ~/.profile
+	$ echo $BASS_HOME
+	/usr/lib/bass
+	$ ./build.sh
+	
 ### Get it on NuGet
 
     Install-Package SoundFingerprinting.Audio.Bass

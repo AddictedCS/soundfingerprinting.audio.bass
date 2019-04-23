@@ -5,6 +5,7 @@ namespace SoundFingerprinting.Audio.Bass
     using System.Threading;
     using ManagedBass;
     using ManagedBass.Mix;
+    using BassLoader;
 
     internal class BassServiceProxy : IBassServiceProxy
     {
@@ -135,7 +136,7 @@ namespace SoundFingerprinting.Audio.Bass
 
         protected virtual void Dispose(bool isDisposing)
         {
-            if (!alreadyDisposed)
+            if (!alreadyDisposed && isDisposing)
             {
                 lifetimeManager.Dispose();
             }
@@ -143,7 +144,7 @@ namespace SoundFingerprinting.Audio.Bass
 
         private class BassLifetimeManager : IDisposable
         {
-            private const string FlacDllName = "bassflac.dll";
+            private IBassLoader bassLoader = new BassLoaderFactory().CreateLoader();
 
             private static int initializedInstances;
 
@@ -156,6 +157,8 @@ namespace SoundFingerprinting.Audio.Bass
                 this.proxy = proxy;
                 if (IsBassLibraryHasToBeInitialized(Interlocked.Increment(ref initializedInstances)))
                 {
+                    bassLoader.Load();
+
                     InitializeBassLibraryWithAudioDevices();
                     SetDefaultConfigs();
                     InitializeRecordingDevice();
@@ -185,6 +188,8 @@ namespace SoundFingerprinting.Audio.Bass
                         {
                             Trace.WriteLine("Could not free Bass library. Possible memory leak!", "Error");
                         }
+
+                        bassLoader.Free();
                     }
                 }
 
