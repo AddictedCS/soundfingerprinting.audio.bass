@@ -3,7 +3,7 @@
     <TargetFrameworks>net461;netcoreapp2.0;netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>Sergiu Ciumac</Authors>
-    <PackageVersion>6.2.1</PackageVersion>
+    <PackageVersion>6.2.1.1</PackageVersion>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AddictedCS/soundfingerprinting.audio.bass</RepositoryUrl>
