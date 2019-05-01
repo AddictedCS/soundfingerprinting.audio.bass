@@ -1,17 +1,21 @@
 ﻿namespace SoundFingerprinting.Audio.Bass.BassLoader
 {
     using System;
+    using System.Runtime.InteropServices;
     using Info;
     using LibraryLoader;
 
     internal class BassLoaderFactory : IBassLoaderFactory
     {
-        public IBassLoader CreateLoader(PlatformID platformId)
+        public IBassLoader CreateLoader()
         {
-            switch (platformId)
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                case PlatformID.MacOSX:
-                    return new BassLoader(new NoOpLibraryLoader(), new EmptyBassLibraryInfo());
+                return new BassLoader(new NoOpLibraryLoader(), new EmptyBassLibraryInfo());
+            }
+            
+            switch (Environment.OSVersion.Platform)
+            {
                 case PlatformID.Unix:
                     if (Type.GetType("Mono.Runtime") != null)
                     {
@@ -21,11 +25,6 @@
                 default:
                     return new BassLoader(new WindowsLibraryLoader(), new WindowsBassLibraryInfo());
             }
-        }
-
-        public IBassLoader CreateLoader()
-        {
-            return CreateLoader(Environment.OSVersion.Platform);
         }
     }
 }
